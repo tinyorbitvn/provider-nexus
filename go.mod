@@ -1,4 +1,4 @@
-module github.com/crossplane/upjet-provider-template
+module github.com/tinyorbitvn/provider-nexus
 
 go 1.26.7
 
@@ -159,3 +159,7 @@ require (
 	sigs.k8s.io/structured-merge-diff/v6 v6.4.2 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
+
+require terraform-provider-sonatyperepo v0.0.0
+
+replace terraform-provider-sonatyperepo => github.com/tinyorbitvn/terraform-provider-sonatyperepo v1.19.0-xp.1
