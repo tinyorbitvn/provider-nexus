@@ -1,0 +1,21 @@
+apiVersion: capability.nexus.tinyorbit.vn/v1alpha1
+kind: WebhookRepository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/webhookrepository
+  labels:
+    testing.upbound.io/example-name: webhook_repo
+  name: webhook-repo
+spec:
+  forProvider:
+    enabled: true
+    notes: Repository webhook configuration
+    properties:
+      names:
+      - component
+      repository: maven-central
+      secretSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      url: https://webhook.example.com/receive

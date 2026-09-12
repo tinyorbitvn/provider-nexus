@@ -1,0 +1,30 @@
+apiVersion: security.nexus.tinyorbit.vn/v1alpha1
+kind: Oauth2
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1alpha1/oauth2
+  labels:
+    testing.upbound.io/example-name: oauth2_config
+  name: oauth2-config
+spec:
+  forProvider:
+    authorizationCustomParams:
+      prompt: consent
+    clientId: nexus-repository-client
+    clientSecretSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    emailClaim: email
+    exactMatchClaims:
+      aud: nexus-repository-client
+    firstNameClaim: given_name
+    groupsClaim: groups
+    idpAuthorizationUrl: https://idp.example.com/oauth2/authorize
+    idpJwksUrl: https://idp.example.com/oauth2/jwks
+    idpJwsAlgorithm: RS256
+    idpLogoutUrl: https://idp.example.com/oauth2/logout
+    idpTokenUrl: https://idp.example.com/oauth2/token
+    lastNameClaim: family_name
+    useTrustStore: false
+    usernameClaim: preferred_username

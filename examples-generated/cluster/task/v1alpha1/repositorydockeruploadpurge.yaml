@@ -1,0 +1,18 @@
+apiVersion: task.nexus.tinyorbit.vn/v1alpha1
+kind: RepositoryDockerUploadPurge
+metadata:
+  annotations:
+    meta.upbound.io/example-id: task/v1alpha1/repositorydockeruploadpurge
+  labels:
+    testing.upbound.io/example-name: docker_upload_purge
+  name: docker-upload-purge
+spec:
+  forProvider:
+    alertEmail: admin@example.com
+    enabled: true
+    frequency:
+      schedule: daily
+    name: docker-upload-purge-task
+    notificationCondition: FAILURE
+    properties:
+      repository_name: docker-hosted-repo

@@ -1,0 +1,23 @@
+apiVersion: system.nexus.tinyorbit.vn/v1alpha1
+kind: ConfigHTTP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: system/v1alpha1/confighttp
+  labels:
+    testing.upbound.io/example-name: http
+  name: http
+spec:
+  forProvider:
+    httpProxy:
+      enabled: false
+    httpsProxy:
+      authentication:
+        enabled: true
+        passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        username: proxy-user
+      enabled: true
+      host: my.proxy.tld
+      port: 8080

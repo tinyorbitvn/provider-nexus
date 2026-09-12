@@ -1,0 +1,24 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: AlpineHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/alpinehosted
+  labels:
+    testing.upbound.io/example-name: alpine_hosted
+  name: alpine-hosted
+spec:
+  forProvider:
+    alpine:
+      keyPair: |-
+        -----BEGIN RSA PRIVATE KEY-----
+        ...
+        -----END RSA PRIVATE KEY-----
+      passphraseSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+      writePolicy: ALLOW

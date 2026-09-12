@@ -1,0 +1,16 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: YumHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/yumhosted
+  labels:
+    testing.upbound.io/example-name: yum_hosted
+  name: yum-hosted
+  namespace: crossplane-system
+spec:
+  forProvider:
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+      writePolicy: ALLOW

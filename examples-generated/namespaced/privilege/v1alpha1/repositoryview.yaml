@@ -1,0 +1,17 @@
+apiVersion: privilege.nexus.m.tinyorbit.vn/v1alpha1
+kind: RepositoryView
+metadata:
+  annotations:
+    meta.upbound.io/example-id: privilege/v1alpha1/repositoryview
+  labels:
+    testing.upbound.io/example-name: view_privilege
+  name: view-privilege
+  namespace: crossplane-system
+spec:
+  forProvider:
+    actions:
+    - BROWSE
+    - READ
+    description: Example repository view privilege
+    format: maven2
+    repository: maven-central

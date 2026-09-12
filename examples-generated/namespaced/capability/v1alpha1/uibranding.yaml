@@ -1,0 +1,17 @@
+apiVersion: capability.nexus.m.tinyorbit.vn/v1alpha1
+kind: UIBranding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/uibranding
+  labels:
+    testing.upbound.io/example-name: ui_branding
+  name: ui-branding
+  namespace: crossplane-system
+spec:
+  forProvider:
+    enabled: true
+    notes: UI branding configuration
+    properties:
+      footerEnabled: false
+      headerEnabled: true
+      headerHtml: <h1>Welcome to My Nexus Repository</h1>

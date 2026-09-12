@@ -1,0 +1,22 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: Maven2Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/maven2group
+  labels:
+    testing.upbound.io/example-name: maven_group
+  name: maven-group
+  namespace: crossplane-system
+spec:
+  forProvider:
+    group:
+      member_repositories:
+      - maven-proxy-repo
+      - maven-hosted-repo
+    maven:
+      layout_policy: STRICT
+      version_policy: RELEASE
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true

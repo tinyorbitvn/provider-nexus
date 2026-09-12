@@ -1,0 +1,16 @@
+apiVersion: privilege.nexus.tinyorbit.vn/v1alpha1
+kind: RepositoryContentSelector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: privilege/v1alpha1/repositorycontentselector
+  labels:
+    testing.upbound.io/example-name: cs_privilege
+  name: cs-privilege
+spec:
+  forProvider:
+    actions:
+    - BROWSE
+    contentSelector: test-content-selector
+    description: Example content selector privilege
+    format: maven2
+    repository: maven-central

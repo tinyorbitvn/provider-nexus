@@ -1,0 +1,14 @@
+apiVersion: capability.nexus.tinyorbit.vn/v1alpha1
+kind: BaseURL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/baseurl
+  labels:
+    testing.upbound.io/example-name: base_url_capability
+  name: base-url-capability
+spec:
+  forProvider:
+    enabled: true
+    notes: Configured via Terraform
+    properties:
+      url: https://repo.example.com

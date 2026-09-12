@@ -1,0 +1,15 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: ConanHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/conanhosted
+  labels:
+    testing.upbound.io/example-name: conan_hosted
+  name: conan-hosted
+spec:
+  forProvider:
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+      writePolicy: ALLOW

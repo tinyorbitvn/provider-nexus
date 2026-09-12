@@ -1,0 +1,30 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: P2Proxy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/p2proxy
+  labels:
+    testing.upbound.io/example-name: p2_proxy
+  name: p2-proxy
+spec:
+  forProvider:
+    httpClient:
+      autoBlock: false
+      blocked: false
+      connection:
+        enableCircularRedirects: true
+        enableCookies: true
+        retries: 0
+        timeout: 60
+        useTrustStore: false
+    negativeCache:
+      enabled: true
+      timeToLive: 1440
+    online: true
+    proxy:
+      contentMaxAge: 1440
+      metadataMaxAge: 1440
+      remoteUrl: https://download.eclipse.org/eclipse/updates/latest
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

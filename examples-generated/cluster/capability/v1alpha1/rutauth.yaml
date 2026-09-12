@@ -1,0 +1,12 @@
+apiVersion: capability.nexus.tinyorbit.vn/v1alpha1
+kind: RutAuth
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/rutauth
+  labels:
+    testing.upbound.io/example-name: rut_auth_capability
+  name: rut-auth-capability
+spec:
+  forProvider:
+    enabled: false
+    notes: Reverse Unique Token authentication

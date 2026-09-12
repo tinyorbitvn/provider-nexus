@@ -1,0 +1,20 @@
+apiVersion: task.nexus.m.tinyorbit.vn/v1alpha1
+kind: BlobstoreCompact
+metadata:
+  annotations:
+    meta.upbound.io/example-id: task/v1alpha1/blobstorecompact
+  labels:
+    testing.upbound.io/example-name: task_bc
+  name: task-bc
+  namespace: crossplane-system
+spec:
+  forProvider:
+    alertEmail: ""
+    enabled: true
+    frequency:
+      schedule: manual
+    name: test-blobstore-compact
+    notificationCondition: FAILURE
+    properties:
+      blobStoreName: default
+      blobsOlderThan: 99

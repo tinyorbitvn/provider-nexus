@@ -1,0 +1,14 @@
+apiVersion: system.nexus.tinyorbit.vn/v1alpha1
+kind: ConfigProductLicense
+metadata:
+  annotations:
+    meta.upbound.io/example-id: system/v1alpha1/configproductlicense
+  labels:
+    testing.upbound.io/example-name: license
+  name: license
+spec:
+  forProvider:
+    licenseDataSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system

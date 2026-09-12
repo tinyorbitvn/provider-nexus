@@ -1,0 +1,20 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: TerraformGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/terraformgroup
+  labels:
+    testing.upbound.io/example-name: terraform_group
+  name: terraform-group
+  namespace: crossplane-system
+spec:
+  forProvider:
+    group:
+      memberNames:
+      - terraform-hosted
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+    terraform:
+      requireAuthentication: false

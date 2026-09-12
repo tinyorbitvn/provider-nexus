@@ -1,0 +1,15 @@
+apiVersion: capability.nexus.m.tinyorbit.vn/v1alpha1
+kind: DefaultRole
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/defaultrole
+  labels:
+    testing.upbound.io/example-name: default_role
+  name: default-role
+  namespace: crossplane-system
+spec:
+  forProvider:
+    enabled: true
+    notes: Default role configuration
+    properties:
+      role: nx-anonymous

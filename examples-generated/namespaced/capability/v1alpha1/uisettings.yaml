@@ -1,0 +1,15 @@
+apiVersion: capability.nexus.m.tinyorbit.vn/v1alpha1
+kind: UISettings
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/uisettings
+  labels:
+    testing.upbound.io/example-name: ui_settings
+  name: ui-settings
+  namespace: crossplane-system
+spec:
+  forProvider:
+    enabled: true
+    notes: UI settings configuration
+    properties:
+      title: My Sonatype Nexus Repository

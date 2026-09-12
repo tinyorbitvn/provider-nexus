@@ -5,7 +5,7 @@ go 1.26.7
 tool golang.org/x/tools/cmd/goimports
 
 require (
-	dario.cat/mergo v1.0.2 // indirect
+	dario.cat/mergo v1.0.2
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/crossplane/crossplane-runtime/v2 v2.5.0-rc.0.0.20260908074656-9b2fb6b1d1ff
 	github.com/crossplane/crossplane-tools v0.0.0-20260719180100-659f1dc036c5
@@ -62,7 +62,6 @@ require (
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/gnostic-models v0.7.1 // indirect
-	github.com/google/go-cmp v0.7.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/go-cty v1.5.0 // indirect
 	github.com/hashicorp/go-hclog v1.6.3 // indirect
@@ -165,6 +164,9 @@ require (
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
 
-require terraform-provider-sonatyperepo v0.0.0
+require (
+	github.com/google/go-cmp v0.7.0
+	terraform-provider-sonatyperepo v0.0.0
+)
 
 replace terraform-provider-sonatyperepo => github.com/tinyorbitvn/terraform-provider-sonatyperepo v1.19.0-xp.1

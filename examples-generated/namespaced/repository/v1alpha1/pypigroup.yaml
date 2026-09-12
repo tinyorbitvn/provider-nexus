@@ -1,0 +1,19 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: PypiGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/pypigroup
+  labels:
+    testing.upbound.io/example-name: pypi_group
+  name: pypi-group
+  namespace: crossplane-system
+spec:
+  forProvider:
+    group:
+      member_repositories:
+      - pypi-proxy-repo
+      - pypi-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

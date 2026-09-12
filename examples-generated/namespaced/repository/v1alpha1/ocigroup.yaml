@@ -1,0 +1,22 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: OciGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/ocigroup
+  labels:
+    testing.upbound.io/example-name: oci_group
+  name: oci-group
+  namespace: crossplane-system
+spec:
+  forProvider:
+    group:
+      memberNames:
+      - oci-proxy-repo
+      - oci-hosted-repo
+    oci:
+      forceBasicAuth: true
+      v1Enabled: false
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true

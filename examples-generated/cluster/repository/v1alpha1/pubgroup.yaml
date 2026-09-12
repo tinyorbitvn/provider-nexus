@@ -1,0 +1,17 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: PubGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/pubgroup
+  labels:
+    testing.upbound.io/example-name: pub_group
+  name: pub-group
+spec:
+  forProvider:
+    group:
+      memberNames:
+      - pub-proxy-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

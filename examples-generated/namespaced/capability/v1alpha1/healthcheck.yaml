@@ -1,0 +1,13 @@
+apiVersion: capability.nexus.m.tinyorbit.vn/v1alpha1
+kind: Healthcheck
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/healthcheck
+  labels:
+    testing.upbound.io/example-name: healthcheck_capability
+  name: healthcheck-capability
+  namespace: crossplane-system
+spec:
+  forProvider:
+    enabled: true
+    notes: Healthcheck capability configuration

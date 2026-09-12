@@ -1,0 +1,21 @@
+apiVersion: security.nexus.m.tinyorbit.vn/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: test_user
+  name: test-user
+  namespace: crossplane-system
+spec:
+  forProvider:
+    emailAddress: test@local.user
+    firstName: Testing
+    lastName: User
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+    roles:
+    - nx-anonymous
+    status: active
+    userId: test-local-user

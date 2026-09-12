@@ -1,0 +1,16 @@
+apiVersion: privilege.nexus.tinyorbit.vn/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: privilege/v1alpha1/application
+  labels:
+    testing.upbound.io/example-name: app_privilege
+  name: app-privilege
+spec:
+  forProvider:
+    actions:
+    - BROWSE
+    - READ
+    - EDIT
+    description: Example application privilege
+    domain: capabilities

@@ -1,0 +1,18 @@
+apiVersion: task.nexus.tinyorbit.vn/v1alpha1
+kind: RepositoryDockerGc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: task/v1alpha1/repositorydockergc
+  labels:
+    testing.upbound.io/example-name: docker_gc
+  name: docker-gc
+spec:
+  forProvider:
+    alertEmail: admin@example.com
+    enabled: true
+    frequency:
+      schedule: daily
+    name: docker-gc-task
+    notificationCondition: FAILURE
+    properties:
+      repositoryName: docker-hosted-repo

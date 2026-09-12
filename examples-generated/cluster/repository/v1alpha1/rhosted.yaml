@@ -1,0 +1,15 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: RHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/rhosted
+  labels:
+    testing.upbound.io/example-name: r_hosted
+  name: r-hosted
+spec:
+  forProvider:
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+      writePolicy: ALLOW

@@ -1,0 +1,13 @@
+apiVersion: security.nexus.tinyorbit.vn/v1alpha1
+kind: Realms
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1alpha1/realms
+  labels:
+    testing.upbound.io/example-name: realms
+  name: realms
+spec:
+  forProvider:
+    active:
+    - NexusAuthorizingRealm
+    - DefaultRole

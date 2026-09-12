@@ -1,0 +1,16 @@
+apiVersion: capability.nexus.m.tinyorbit.vn/v1alpha1
+kind: FirewallAuditAndQuarantine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/firewallauditandquarantine
+  labels:
+    testing.upbound.io/example-name: firewall_capability
+  name: firewall-capability
+  namespace: crossplane-system
+spec:
+  forProvider:
+    enabled: true
+    notes: Firewall audit and quarantine configuration
+    properties:
+      quarantine: true
+      repository: maven-central

@@ -1,0 +1,30 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: CargoProxy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/cargoproxy
+  labels:
+    testing.upbound.io/example-name: cargo_proxy
+  name: cargo-proxy
+spec:
+  forProvider:
+    httpClient:
+      autoBlock: false
+      blocked: false
+      connection:
+        enableCircularRedirects: true
+        enableCookies: true
+        retries: 0
+        timeout: 60
+        useTrustStore: false
+    negativeCache:
+      enabled: true
+      timeToLive: 1440
+    online: true
+    proxy:
+      contentMaxAge: 1440
+      metadataMaxAge: 1440
+      remoteUrl: https://github.com/rust-lang/crates.io-index
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

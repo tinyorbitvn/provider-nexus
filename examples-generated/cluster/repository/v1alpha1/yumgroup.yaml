@@ -1,0 +1,18 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: YumGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/yumgroup
+  labels:
+    testing.upbound.io/example-name: yum_group
+  name: yum-group
+spec:
+  forProvider:
+    group:
+      member_repositories:
+      - yum-proxy-repo
+      - yum-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

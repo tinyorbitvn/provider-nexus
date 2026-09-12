@@ -1,0 +1,18 @@
+apiVersion: capability.nexus.m.tinyorbit.vn/v1alpha1
+kind: CustomS3Regions
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/customs3regions
+  labels:
+    testing.upbound.io/example-name: custom_regions
+  name: custom-regions
+  namespace: crossplane-system
+spec:
+  forProvider:
+    enabled: true
+    notes: Custom S3 regions configuration
+    properties:
+      regions:
+      - us-west-1
+      - eu-west-1
+      - ap-southeast-1

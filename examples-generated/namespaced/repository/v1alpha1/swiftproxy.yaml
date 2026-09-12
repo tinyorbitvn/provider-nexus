@@ -1,0 +1,33 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: SwiftProxy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/swiftproxy
+  labels:
+    testing.upbound.io/example-name: swift_proxy
+  name: swift-proxy
+  namespace: crossplane-system
+spec:
+  forProvider:
+    httpClient:
+      autoBlock: false
+      blocked: false
+      connection:
+        enableCircularRedirects: true
+        enableCookies: true
+        retries: 0
+        timeout: 60
+        useTrustStore: false
+    negativeCache:
+      enabled: true
+      timeToLive: 1440
+    online: true
+    proxy:
+      contentMaxAge: 1440
+      metadataMaxAge: 1440
+      remoteUrl: https://registry.terraform.io
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+    swift:
+      requireAuthentication: false

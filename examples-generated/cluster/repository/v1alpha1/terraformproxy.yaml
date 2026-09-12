@@ -1,0 +1,30 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: TerraformProxy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/terraformproxy
+  labels:
+    testing.upbound.io/example-name: terraform_proxy
+  name: terraform-proxy
+spec:
+  forProvider:
+    httpClient:
+      autoBlock: false
+      blocked: false
+      connection:
+        enableCircularRedirects: true
+        enableCookies: true
+        retries: 0
+        timeout: 60
+        useTrustStore: false
+    negativeCache:
+      enabled: true
+      timeToLive: 1440
+    online: true
+    proxy:
+      contentMaxAge: 1440
+      metadataMaxAge: 1440
+      remoteUrl: https://registry.terraform.io
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
