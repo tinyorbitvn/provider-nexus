@@ -3,6 +3,7 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"strings"
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/pkg/errors"
@@ -11,21 +12,24 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/terraform"
 
+	"terraform-provider-sonatyperepo/xpprovider"
+
 	clusterv1beta1 "github.com/tinyorbitvn/provider-nexus/apis/cluster/v1beta1"
 	namespacedv1beta1 "github.com/tinyorbitvn/provider-nexus/apis/namespaced/v1beta1"
+	pnversion "github.com/tinyorbitvn/provider-nexus/internal/version"
 )
 
 const (
 	// error messages
-	errNoProviderConfig     = "no providerConfigRef provided"
-	errGetProviderConfig    = "cannot get referenced ProviderConfig"
-	errTrackUsage           = "cannot track ProviderConfig usage"
-	errExtractCredentials   = "cannot extract credentials"
-	errUnmarshalCredentials = "cannot unmarshal nexus credentials as JSON"
+	errNoProviderConfig   = "no providerConfigRef provided"
+	errGetProviderConfig  = "cannot get referenced ProviderConfig"
+	errTrackUsage         = "cannot track ProviderConfig usage"
+	errExtractCredentials = "cannot extract credentials"
 )
 
-// TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
-// returns Terraform provider setup configuration
+// TerraformSetupBuilder returns a SetupFn that resolves the ProviderConfig of
+// a managed resource and prepares the embedded provider: the raw password from
+// the referenced Secret key plus url/username from the ProviderConfig spec.
 func TerraformSetupBuilder(version, providerSource, providerVersion string) terraform.SetupFn {
 	return func(ctx context.Context, client client.Client, mg resource.Managed) (terraform.Setup, error) {
 		ps := terraform.Setup{
@@ -45,18 +49,27 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		if err != nil {
 			return ps, errors.Wrap(err, errExtractCredentials)
 		}
-		creds := map[string]string{}
-		if err := json.Unmarshal(data, &creds); err != nil {
-			return ps, errors.Wrap(err, errUnmarshalCredentials)
-		}
 
-		// Set credentials in Terraform provider configuration.
-		/*ps.Configuration = map[string]any{
-			"username": creds["username"],
-			"password": creds["password"],
-		}*/
+		ps.Configuration = buildConfiguration(pcSpec, string(data))
+		// Every resource runs in-process through the plugin-framework provider;
+		// Upjet configures it with ps.Configuration on first use.
+		ps.FrameworkProvider = xpprovider.New(pnversion.Version)
 		return ps, nil
 	}
+}
+
+// buildConfiguration maps the ProviderConfig spec and the extracted password
+// onto the Terraform provider's configuration attributes.
+func buildConfiguration(pc *namespacedv1beta1.ProviderConfigSpec, password string) map[string]any {
+	cfg := map[string]any{
+		"url":      pc.URL,
+		"username": pc.Username,
+		"password": strings.TrimSpace(password),
+	}
+	if pc.ClusterStabilisationDelayMs != nil {
+		cfg["cluster_stabilisation_delay_ms"] = *pc.ClusterStabilisationDelayMs
+	}
+	return cfg
 }
 
 func toSharedPCSpec(pc *clusterv1beta1.ProviderConfig) (*namespacedv1beta1.ProviderConfigSpec, error) {
