@@ -8,8 +8,26 @@ import (
 
 // A ProviderConfigSpec defines the desired state of a ProviderConfig.
 type ProviderConfigSpec struct {
-	// Credentials required to authenticate to this provider.
+	// URL is the base URL of the Nexus Repository server,
+	// e.g. http://nexus.nexus.svc:8081. Passed to the Terraform provider as `url`.
+	// +kubebuilder:validation:MinLength=1
+	URL string `json:"url"`
+
+	// Username used to authenticate against Nexus. The password comes from
+	// Credentials. Passed as `username`.
+	// +kubebuilder:default=admin
+	// +optional
+	Username string `json:"username,omitempty"`
+
+	// Credentials holds the password. The referenced Secret key must contain
+	// the raw password (not a JSON document); leading/trailing whitespace is
+	// trimmed so a value loaded with `echo` still works.
 	Credentials ProviderCredentials `json:"credentials"`
+
+	// ClusterStabilisationDelayMs is passed through to the Terraform provider
+	// as `cluster_stabilisation_delay_ms`. Leave unset for the provider default.
+	// +optional
+	ClusterStabilisationDelayMs *int32 `json:"clusterStabilisationDelayMs,omitempty"`
 }
 
 // ProviderCredentials required to authenticate.
