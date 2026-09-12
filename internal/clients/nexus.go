@@ -12,7 +12,7 @@ import (
 
 	"github.com/crossplane/upjet/v2/pkg/terraform"
 
-	"terraform-provider-sonatyperepo/xpprovider"
+	"github.com/tinyorbitvn/terraform-provider-sonatyperepo/xpprovider"
 
 	clusterv1beta1 "github.com/tinyorbitvn/provider-nexus/apis/cluster/v1beta1"
 	namespacedv1beta1 "github.com/tinyorbitvn/provider-nexus/apis/namespaced/v1beta1"

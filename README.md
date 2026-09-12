@@ -7,11 +7,13 @@ Terraform provider
 [`sonatype-nexus-community/terraform-provider-sonatyperepo`](https://github.com/sonatype-nexus-community/terraform-provider-sonatyperepo).
 
 Every resource runs **in-process** through terraform-plugin-framework — the
-provider image contains no Terraform CLI. The Terraform provider is embedded via
-the fork
-[`tinyorbitvn/terraform-provider-sonatyperepo`](https://github.com/tinyorbitvn/terraform-provider-sonatyperepo)
-(branch `xpprovider`), which only adds a public `xpprovider` package
-re-exporting the provider constructor; a PR to upstream the shim is open.
+provider image contains no Terraform CLI. The Terraform provider is embedded
+via the fork
+[`tinyorbitvn/terraform-provider-sonatyperepo`](https://github.com/tinyorbitvn/terraform-provider-sonatyperepo),
+required directly as `github.com/tinyorbitvn/terraform-provider-sonatyperepo`
+v1.19.0-xp.2 (fork branch `xp`; `xpprovider` branch = upstream PR material —
+it only adds a public `xpprovider` package re-exporting the provider
+constructor; a PR to upstream the shim is open).
 
 ## Install
 
@@ -78,10 +80,14 @@ make run            # controller out-of-cluster against $KUBECONFIG
 ### Bumping the Terraform provider
 
 1. Rebase the fork branch `xpprovider` onto the new upstream tag, tag it
-   `v<upstream>-xp.1`, push.
-2. Update `TERRAFORM_PROVIDER_VERSION` in `Makefile` and the `replace` line in
-   `go.mod`; `go mod tidy`.
-3. `make generate && make check-diff`; review CRD changes reported by
+   `v<upstream>-xp.1`, push (upstream PR material only — no dotted module
+   path here).
+2. Rebase fork branch `xp` onto the updated `xpprovider`, tag it
+   `v<upstream>-xp.2`, push.
+3. Update `TERRAFORM_PROVIDER_VERSION` in `Makefile` and the `require` line
+   (`github.com/tinyorbitvn/terraform-provider-sonatyperepo`) in `go.mod`;
+   `go mod tidy`.
+4. `make generate && make check-diff`; review CRD changes reported by
    `make report-breaking-changes` (crddiff) in CI.
-4. Tag `vX.Y.Z`; the `Publish` workflow pushes
+5. Tag `vX.Y.Z`; the `Publish` workflow pushes
    `ghcr.io/tinyorbitvn/provider-nexus:vX.Y.Z`.

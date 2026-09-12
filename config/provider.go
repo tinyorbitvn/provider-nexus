@@ -6,7 +6,7 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 
-	"terraform-provider-sonatyperepo/xpprovider"
+	"github.com/tinyorbitvn/terraform-provider-sonatyperepo/xpprovider"
 
 	"github.com/tinyorbitvn/provider-nexus/internal/version"
 )
