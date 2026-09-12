@@ -6,8 +6,9 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 
-	nullCluster "github.com/tinyorbitvn/provider-nexus/config/cluster/null"
-	nullNamespaced "github.com/tinyorbitvn/provider-nexus/config/namespaced/null"
+	"terraform-provider-sonatyperepo/xpprovider"
+
+	"github.com/tinyorbitvn/provider-nexus/internal/version"
 )
 
 const (
@@ -26,17 +27,15 @@ func GetProvider() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithRootGroup("nexus.tinyorbit.vn"),
 		ujconfig.WithIncludeList(ExternalNameConfigured()),
+		// Every resource is served in-process by the embedded plugin-framework
+		// provider; nothing falls back to the Terraform CLI.
+		ujconfig.WithTerraformPluginFrameworkIncludeList(ExternalNameConfigured()),
+		ujconfig.WithTerraformPluginFrameworkProvider(xpprovider.New(version.Version)),
 		ujconfig.WithFeaturesPackage("internal/features"),
 		ujconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),
+			GroupKindOverrides(),
 		))
-
-	for _, configure := range []func(provider *ujconfig.Provider){
-		// add custom config functions
-		nullCluster.Configure,
-	} {
-		configure(pc)
-	}
 
 	pc.ConfigureResources()
 	return pc
@@ -47,20 +46,18 @@ func GetProviderNamespaced() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithRootGroup("nexus.m.tinyorbit.vn"),
 		ujconfig.WithIncludeList(ExternalNameConfigured()),
+		// Every resource is served in-process by the embedded plugin-framework
+		// provider; nothing falls back to the Terraform CLI.
+		ujconfig.WithTerraformPluginFrameworkIncludeList(ExternalNameConfigured()),
+		ujconfig.WithTerraformPluginFrameworkProvider(xpprovider.New(version.Version)),
 		ujconfig.WithFeaturesPackage("internal/features"),
 		ujconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),
+			GroupKindOverrides(),
 		),
 		ujconfig.WithExampleManifestConfiguration(ujconfig.ExampleManifestConfiguration{
 			ManagedResourceNamespace: "crossplane-system",
 		}))
-
-	for _, configure := range []func(provider *ujconfig.Provider){
-		// add custom config functions
-		nullNamespaced.Configure,
-	} {
-		configure(pc)
-	}
 
 	pc.ConfigureResources()
 	return pc
