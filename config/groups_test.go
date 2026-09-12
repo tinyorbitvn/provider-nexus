@@ -13,6 +13,17 @@ func TestGroupKindOverrides(t *testing.T) {
 		"sonatyperepo_blob_store_group": {"blobstore", "Group"},
 		"sonatyperepo_user":             {"security", "User"},
 		"sonatyperepo_role":             {"security", "Role"},
+		// Deprecated pre-rename aliases of sonatyperepo_repository_rubygems_*
+		// (both exist in the schema): the default Kind differs from the
+		// canonical resource's only by the casing of one letter
+		// ("RubyGemsHosted" vs "RubygemsHosted"), so both lowercase to the
+		// same generated filename and one clobbers the other on disk during
+		// `make generate` (hit 2026-09-13). Only Kind is overridden here;
+		// ShortGroup keeps Upjet's default ("repository"), which is why the
+		// expectation below is "default" — same as the untouched cases.
+		"sonatyperepo_repository_ruby_gems_group":  {"default", "RubygemsLegacyGroup"},
+		"sonatyperepo_repository_ruby_gems_hosted": {"default", "RubygemsLegacyHosted"},
+		"sonatyperepo_repository_ruby_gems_proxy":  {"default", "RubygemsLegacyProxy"},
 	}
 	for name, want := range cases {
 		r := &ujconfig.Resource{Name: name, ShortGroup: "default", Kind: "Default"}
