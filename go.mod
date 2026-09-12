@@ -166,7 +166,5 @@ require (
 
 require (
 	github.com/google/go-cmp v0.7.0
-	terraform-provider-sonatyperepo v0.0.0
+	github.com/tinyorbitvn/terraform-provider-sonatyperepo v1.19.0-xp.2
 )
-
-replace terraform-provider-sonatyperepo => github.com/tinyorbitvn/terraform-provider-sonatyperepo v1.19.0-xp.1
