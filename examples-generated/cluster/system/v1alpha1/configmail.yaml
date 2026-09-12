@@ -1,0 +1,25 @@
+apiVersion: system.nexus.tinyorbit.vn/v1alpha1
+kind: ConfigMail
+metadata:
+  annotations:
+    meta.upbound.io/example-id: system/v1alpha1/configmail
+  labels:
+    testing.upbound.io/example-name: mail_config
+  name: mail-config
+spec:
+  forProvider:
+    enabled: true
+    fromAddress: nexus@example.com
+    host: smtp.example.com
+    nexusTrustStoreEnabled: false
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    port: 587
+    sslOnConnectEnabled: false
+    sslServerIdentityCheckEnabled: true
+    startTlsEnabled: true
+    startTlsRequired: false
+    subjectPrefix: '[Nexus]'
+    username: nexus-user

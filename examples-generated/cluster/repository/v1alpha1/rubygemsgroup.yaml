@@ -1,0 +1,18 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: RubygemsGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/rubygemsgroup
+  labels:
+    testing.upbound.io/example-name: rubygems_group
+  name: rubygems-group
+spec:
+  forProvider:
+    group:
+      member_repositories:
+      - rubygems-proxy-repo
+      - rubygems-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

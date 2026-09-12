@@ -1,0 +1,15 @@
+apiVersion: capability.nexus.tinyorbit.vn/v1alpha1
+kind: OutreachManagement
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/outreachmanagement
+  labels:
+    testing.upbound.io/example-name: outreach_capability
+  name: outreach-capability
+spec:
+  forProvider:
+    enabled: true
+    notes: Outreach management configuration
+    properties:
+      alwaysRemote: false
+      overrideUrl: https://outreach.example.com

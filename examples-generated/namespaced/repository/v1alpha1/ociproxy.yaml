@@ -1,0 +1,39 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: OciProxy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/ociproxy
+  labels:
+    testing.upbound.io/example-name: oci_proxy
+  name: oci-proxy
+  namespace: crossplane-system
+spec:
+  forProvider:
+    cosign:
+      enforcement: NONE
+    httpClient:
+      autoBlock: false
+      blocked: false
+      connection:
+        enableCircularRedirects: true
+        enableCookies: true
+        retries: 0
+        timeout: 60
+        useTrustStore: false
+    negativeCache:
+      enabled: true
+      timeToLive: 1440
+    oci:
+      forceBasicAuth: false
+      v1Enabled: false
+    ociProxy:
+      indexType: REGISTRY
+      indexUrl: https://index.docker.io
+    online: true
+    proxy:
+      contentMaxAge: 1440
+      metadataMaxAge: 1440
+      remoteUrl: https://registry-1.docker.io
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true

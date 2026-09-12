@@ -1,0 +1,11 @@
+apiVersion: security.nexus.tinyorbit.vn/v1alpha1
+kind: SSLTruststore
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1alpha1/ssltruststore
+  labels:
+    testing.upbound.io/example-name: my_ca
+  name: my-ca
+spec:
+  forProvider:
+    pem: ${file("${path.module}/certs/MY_CA.pem")}

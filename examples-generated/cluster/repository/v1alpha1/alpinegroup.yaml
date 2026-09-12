@@ -1,0 +1,27 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: AlpineGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/alpinegroup
+  labels:
+    testing.upbound.io/example-name: alpine_group
+  name: alpine-group
+spec:
+  forProvider:
+    alpine:
+      keyPair: |-
+        -----BEGIN RSA PRIVATE KEY-----
+        ...
+        -----END RSA PRIVATE KEY-----
+      passphraseSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+    group:
+      memberNames:
+      - alpine-proxy-repo
+      - alpine-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

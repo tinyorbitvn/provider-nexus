@@ -1,0 +1,15 @@
+apiVersion: security.nexus.tinyorbit.vn/v1alpha1
+kind: SsrfProtection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1alpha1/ssrfprotection
+  labels:
+    testing.upbound.io/example-name: ssrf
+  name: ssrf
+spec:
+  forProvider:
+    allowedDomains:
+    - internal.example.com
+    allowedIps:
+    - 10.0.0.5
+    enabled: true

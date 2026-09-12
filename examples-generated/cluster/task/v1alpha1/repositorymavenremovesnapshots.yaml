@@ -1,0 +1,22 @@
+apiVersion: task.nexus.tinyorbit.vn/v1alpha1
+kind: RepositoryMavenRemoveSnapshots
+metadata:
+  annotations:
+    meta.upbound.io/example-id: task/v1alpha1/repositorymavenremovesnapshots
+  labels:
+    testing.upbound.io/example-name: maven_remove_snapshots
+  name: maven-remove-snapshots
+spec:
+  forProvider:
+    alertEmail: admin@example.com
+    enabled: true
+    frequency:
+      recurringDays:
+      - 1
+      schedule: weekly
+    name: maven-remove-snapshots-task
+    notificationCondition: FAILURE
+    properties:
+      min_days_to_keep: 7
+      regex: .*
+      repositoryName: maven-hosted-repo

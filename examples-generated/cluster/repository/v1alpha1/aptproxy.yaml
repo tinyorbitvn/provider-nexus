@@ -1,0 +1,32 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: AptProxy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/aptproxy
+  labels:
+    testing.upbound.io/example-name: apt_proxy
+  name: apt-proxy
+spec:
+  forProvider:
+    apt:
+      distribution: bionic
+    httpClient:
+      autoBlock: false
+      blocked: false
+      connection:
+        enableCircularRedirects: true
+        enableCookies: true
+        retries: 0
+        timeout: 60
+        useTrustStore: false
+    negativeCache:
+      enabled: true
+      timeToLive: 1440
+    online: true
+    proxy:
+      contentMaxAge: 1439
+      metadataMaxAge: 1439
+      remoteUrl: https://archive.ubuntu.com/ubuntu/
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true

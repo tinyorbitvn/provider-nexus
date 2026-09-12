@@ -1,0 +1,19 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: Maven2Hosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/maven2hosted
+  labels:
+    testing.upbound.io/example-name: maven_hosted
+  name: maven-hosted
+  namespace: crossplane-system
+spec:
+  forProvider:
+    maven:
+      layoutPolicy: STRICT
+      versionPolicy: RELEASE
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true
+      writePolicy: ALLOW

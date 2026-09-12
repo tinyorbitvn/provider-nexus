@@ -1,0 +1,21 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: DockerGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/dockergroup
+  labels:
+    testing.upbound.io/example-name: docker_group
+  name: docker-group
+  namespace: crossplane-system
+spec:
+  forProvider:
+    docker:
+      forceBasicAuth: true
+    group:
+      member_repositories:
+      - docker-proxy-repo
+      - docker-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true

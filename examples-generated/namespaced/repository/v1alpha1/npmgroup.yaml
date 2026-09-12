@@ -1,0 +1,19 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: NpmGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/npmgroup
+  labels:
+    testing.upbound.io/example-name: npm_group
+  name: npm-group
+  namespace: crossplane-system
+spec:
+  forProvider:
+    group:
+      member_repositories:
+      - npm-proxy-repo
+      - npm-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true

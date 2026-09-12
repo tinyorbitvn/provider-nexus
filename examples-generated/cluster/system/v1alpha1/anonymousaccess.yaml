@@ -1,0 +1,13 @@
+apiVersion: system.nexus.tinyorbit.vn/v1alpha1
+kind: AnonymousAccess
+metadata:
+  annotations:
+    meta.upbound.io/example-id: system/v1alpha1/anonymousaccess
+  labels:
+    testing.upbound.io/example-name: anonymous_access
+  name: anonymous-access
+spec:
+  forProvider:
+    enabled: true
+    realmName: NexusAuthorizingRealm
+    userId: anonymous

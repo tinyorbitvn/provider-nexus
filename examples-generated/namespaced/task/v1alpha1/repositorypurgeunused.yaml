@@ -1,0 +1,24 @@
+apiVersion: task.nexus.m.tinyorbit.vn/v1alpha1
+kind: RepositoryPurgeUnused
+metadata:
+  annotations:
+    meta.upbound.io/example-id: task/v1alpha1/repositorypurgeunused
+  labels:
+    testing.upbound.io/example-name: purge_unused
+  name: purge-unused
+  namespace: crossplane-system
+spec:
+  forProvider:
+    alertEmail: admin@example.com
+    enabled: true
+    frequency:
+      recurringDays:
+      - 1
+      schedule: weekly
+      startDate: 1777167000000
+      timezoneOffset: "-05:00"
+    name: purge-unused-task
+    notificationCondition: FAILURE
+    properties:
+      lastUsed: 30
+      repositoryName: maven-central

@@ -1,0 +1,1058 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.1
+  name: dockerproxies.repository.nexus.m.tinyorbit.vn
+spec:
+  group: repository.nexus.m.tinyorbit.vn
+  names:
+    categories:
+    - crossplane
+    - managed
+    - sonatyperepo
+    kind: DockerProxy
+    listKind: DockerProxyList
+    plural: dockerproxies
+    singular: dockerproxy
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: DockerProxy is the Schema for the DockerProxys API. Manage Proxy
+          DOCKER Repositories.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: DockerProxySpec defines the desired state of DockerProxy
+            properties:
+              forProvider:
+                properties:
+                  cleanup:
+                    description: (Attributes) Repository Cleanup configuration (see
+                      below for nested schema)
+                    properties:
+                      policyNames:
+                        description: |-
+                          (Set of String) Set of Cleanup Policies that will apply to this Repository
+                          Set of Cleanup Policies that will apply to this Repository
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  docker:
+                    description: (Attributes) Docker specific configuration for this
+                      Repository (see below for nested schema)
+                    properties:
+                      forceBasicAuth:
+                        description: |-
+                          (Boolean) Whether to force authentication (Docker Bearer Token Realm required if false)
+                          Whether to force authentication (Docker Bearer Token Realm required if false)
+                        type: boolean
+                      httpPort:
+                        description: |-
+                          (Number) Create an HTTP connector at specified port
+                          Create an HTTP connector at specified port
+                        type: number
+                      httpsPort:
+                        description: |-
+                          (Number) Create an HTTPS connector at specified port
+                          Create an HTTPS connector at specified port
+                        type: number
+                      pathEnabled:
+                        description: |-
+                          (Boolean) Allows to use repository name in Docker image paths (only supply for Sonatype Nexus Repository Manager >= 3.83.0)
+                          Allows to use repository name in Docker image paths (only supply for Sonatype Nexus Repository Manager >= 3.83.0)
+                        type: boolean
+                      subdomain:
+                        description: |-
+                          (String) Allows to use subdomain
+                          Allows to use subdomain
+                        type: string
+                      v1Enabled:
+                        description: |-
+                          (Boolean) Whether to allow clients to use the V1 API to interact with this repository
+                          Whether to allow clients to use the V1 API to interact with this repository
+                        type: boolean
+                    type: object
+                  dockerProxy:
+                    description: (Attributes) Docker Proxy specific configuration
+                      for this Repository (see below for nested schema)
+                    properties:
+                      cacheForeignLayers:
+                        description: |-
+                          (Boolean) Allow Nexus Repository Manager to download and cache foreign layers
+                          Allow Nexus Repository Manager to download and cache foreign layers
+                        type: boolean
+                      foreignLayerUrlWhitelist:
+                        description: |-
+                          (Set of String) Foreign Layer URL Whitelist
+                          Foreign Layer URL Whitelist
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      indexType:
+                        description: |-
+                          (String) Type of Docker Index
+                          Type of Docker Index
+                        type: string
+                      indexUrl:
+                        description: |-
+                          (String) Url of Docker Index to use
+                          Url of Docker Index to use
+                        type: string
+                    type: object
+                  httpClient:
+                    description: (Attributes) HTTP Client configuration for this Repository
+                      (see below for nested schema)
+                    properties:
+                      authentication:
+                        description: (Attributes) Authentication to upstream Repository
+                          (see below for nested schema)
+                        properties:
+                          bearerTokenSecretRef:
+                            description: |-
+                              (String, Sensitive) Bearer Token used when Authentication Type == bearerToken
+                              Bearer Token used when Authentication Type == bearerToken
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                          ntlmDomain:
+                            description: |-
+                              (String) NTLM Domain
+                              NTLM Domain
+                            type: string
+                          ntlmHost:
+                            description: |-
+                              (String) NTLM Host
+                              NTLM Host
+                            type: string
+                          passwordSecretRef:
+                            description: |-
+                              (String, Sensitive) Password
+                              Password
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                          preemptive:
+                            description: |-
+                              emptive authentication. Use with caution. Defaults to false.
+                              Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+                            type: boolean
+                          type:
+                            description: |-
+                              (String) Authentication type
+                              Authentication type
+                            type: string
+                          username:
+                            description: |-
+                              (String) Username
+                              Username
+                            type: string
+                        type: object
+                      autoBlock:
+                        description: |-
+                          block outbound connections if remote peer is detected as unreachable/unresponsive
+                          Whether to auto-block outbound connections if remote peer is detected as unreachable/unresponsive
+                        type: boolean
+                      blocked:
+                        description: |-
+                          (Boolean) Whether to block outbound connections on the repository
+                          Whether to block outbound connections on the repository
+                        type: boolean
+                      connection:
+                        description: (Attributes) HTTP Client Connection configuration
+                          for this Repository (see below for nested schema)
+                        properties:
+                          enableCircularRedirects:
+                            description: |-
+                              (Boolean) Whether to enable redirects to the same location (may be required by some servers)
+                              Whether to enable redirects to the same location (may be required by some servers)
+                            type: boolean
+                          enableCookies:
+                            description: |-
+                              (Boolean) Whether to allow cookies to be stored and used
+                              Whether to allow cookies to be stored and used
+                            type: boolean
+                          retries:
+                            description: |-
+                              (Number) Total retries if the initial connection attempt suffers a timeout
+                              Total retries if the initial connection attempt suffers a timeout
+                            type: number
+                          timeout:
+                            description: |-
+                              (Number) Seconds to wait for activity before stopping and retrying the connection
+                              Seconds to wait for activity before stopping and retrying the connection
+                            type: number
+                          useTrustStore:
+                            description: |-
+                              (Boolean) Use certificates stored in the Nexus Repository Manager truststore to connect to external systems
+                              Use certificates stored in the Nexus Repository Manager truststore to connect to external systems
+                            type: boolean
+                          userAgentSuffix:
+                            description: |-
+                              Agent header in HTTP requests
+                              Custom fragment to append to User-Agent header in HTTP requests
+                            type: string
+                        type: object
+                    type: object
+                  negativeCache:
+                    description: (Attributes) Negative Cache configuration for this
+                      Repository (see below for nested schema)
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Whether to cache responses for content not present in the proxied repository
+                          Whether to cache responses for content not present in the proxied repository
+                        type: boolean
+                      timeToLive:
+                        description: |-
+                          (Number) How long to cache the fact that a file was not found in the repository (in minutes)
+                          How long to cache the fact that a file was not found in the repository (in minutes)
+                        type: number
+                    type: object
+                  online:
+                    description: |-
+                      (Boolean) Whether this Repository is online and accepting incoming requests
+                      Whether this Repository is online and accepting incoming requests
+                    type: boolean
+                  proxy:
+                    description: (Attributes) Proxy specific configuration for this
+                      Repository (see below for nested schema)
+                    properties:
+                      contentMaxAge:
+                        description: |-
+                          (Number) How long to cache artifacts before rechecking the remote repository (in minutes)
+                          How long to cache artifacts before rechecking the remote repository (in minutes)
+                        type: number
+                      metadataMaxAge:
+                        description: |-
+                          (Number) How long to cache metadata before rechecking the remote repository (in minutes)
+                          How long to cache metadata before rechecking the remote repository (in minutes)
+                        type: number
+                      remoteUrl:
+                        description: |-
+                          (String) Location of the remote repository being proxied
+                          Location of the remote repository being proxied
+                        type: string
+                    type: object
+                  replication:
+                    description: (Attributes) Replication configuration for this Repository
+                      (see below for nested schema)
+                    properties:
+                      assetPathRegex:
+                        description: |-
+                          emptively pull
+                          Regular Expression of Asset Paths to pull pre-emptively pull
+                        type: string
+                      preemptivePullEnabled:
+                        description: |-
+                          emptive pull is enabled
+                          Whether pre-emptive pull is enabled
+                        type: boolean
+                    type: object
+                  repositoryFirewall:
+                    description: (Attributes) Sonatype Repository Firewall configuration
+                      for this Repository.
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Whether to cache responses for content not present in the proxied repository
+                          Whether to enable Sonatype Repository Firewall for this Repository
+                        type: boolean
+                      quarantine:
+                        description: |-
+                          just run in Audit mode) - see documentation.
+                          Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see [documentation](https://help.sonatype.com/en/firewall-quarantine.html).
+                        type: boolean
+                    type: object
+                  routingRule:
+                    description: |-
+                      (String) Routing Rule
+                      Routing Rule
+                    type: string
+                  storage:
+                    description: (Attributes) Storage configuration for this Repository
+                      (see below for nested schema)
+                    properties:
+                      blobStoreName:
+                        description: |-
+                          (String) Name of the Blob Store to use
+                          Name of the Blob Store to use
+                        type: string
+                      strictContentTypeValidation:
+                        description: |-
+                          (Boolean) Whether this Repository validates that all content uploaded to this repository is of a MIME type appropriate for the repository format
+                          Whether this Repository validates that all content uploaded to this repository is of a MIME type appropriate for the repository format
+                        type: boolean
+                    type: object
+                  url:
+                    description: |-
+                      (String) URL to access the Repository
+                      URL to access the Repository
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  cleanup:
+                    description: (Attributes) Repository Cleanup configuration (see
+                      below for nested schema)
+                    properties:
+                      policyNames:
+                        description: |-
+                          (Set of String) Set of Cleanup Policies that will apply to this Repository
+                          Set of Cleanup Policies that will apply to this Repository
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  docker:
+                    description: (Attributes) Docker specific configuration for this
+                      Repository (see below for nested schema)
+                    properties:
+                      forceBasicAuth:
+                        description: |-
+                          (Boolean) Whether to force authentication (Docker Bearer Token Realm required if false)
+                          Whether to force authentication (Docker Bearer Token Realm required if false)
+                        type: boolean
+                      httpPort:
+                        description: |-
+                          (Number) Create an HTTP connector at specified port
+                          Create an HTTP connector at specified port
+                        type: number
+                      httpsPort:
+                        description: |-
+                          (Number) Create an HTTPS connector at specified port
+                          Create an HTTPS connector at specified port
+                        type: number
+                      pathEnabled:
+                        description: |-
+                          (Boolean) Allows to use repository name in Docker image paths (only supply for Sonatype Nexus Repository Manager >= 3.83.0)
+                          Allows to use repository name in Docker image paths (only supply for Sonatype Nexus Repository Manager >= 3.83.0)
+                        type: boolean
+                      subdomain:
+                        description: |-
+                          (String) Allows to use subdomain
+                          Allows to use subdomain
+                        type: string
+                      v1Enabled:
+                        description: |-
+                          (Boolean) Whether to allow clients to use the V1 API to interact with this repository
+                          Whether to allow clients to use the V1 API to interact with this repository
+                        type: boolean
+                    type: object
+                  dockerProxy:
+                    description: (Attributes) Docker Proxy specific configuration
+                      for this Repository (see below for nested schema)
+                    properties:
+                      cacheForeignLayers:
+                        description: |-
+                          (Boolean) Allow Nexus Repository Manager to download and cache foreign layers
+                          Allow Nexus Repository Manager to download and cache foreign layers
+                        type: boolean
+                      foreignLayerUrlWhitelist:
+                        description: |-
+                          (Set of String) Foreign Layer URL Whitelist
+                          Foreign Layer URL Whitelist
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      indexType:
+                        description: |-
+                          (String) Type of Docker Index
+                          Type of Docker Index
+                        type: string
+                      indexUrl:
+                        description: |-
+                          (String) Url of Docker Index to use
+                          Url of Docker Index to use
+                        type: string
+                    type: object
+                  httpClient:
+                    description: (Attributes) HTTP Client configuration for this Repository
+                      (see below for nested schema)
+                    properties:
+                      authentication:
+                        description: (Attributes) Authentication to upstream Repository
+                          (see below for nested schema)
+                        properties:
+                          bearerTokenSecretRef:
+                            description: |-
+                              (String, Sensitive) Bearer Token used when Authentication Type == bearerToken
+                              Bearer Token used when Authentication Type == bearerToken
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                          ntlmDomain:
+                            description: |-
+                              (String) NTLM Domain
+                              NTLM Domain
+                            type: string
+                          ntlmHost:
+                            description: |-
+                              (String) NTLM Host
+                              NTLM Host
+                            type: string
+                          passwordSecretRef:
+                            description: |-
+                              (String, Sensitive) Password
+                              Password
+                            properties:
+                              key:
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            type: object
+                          preemptive:
+                            description: |-
+                              emptive authentication. Use with caution. Defaults to false.
+                              Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+                            type: boolean
+                          type:
+                            description: |-
+                              (String) Authentication type
+                              Authentication type
+                            type: string
+                          username:
+                            description: |-
+                              (String) Username
+                              Username
+                            type: string
+                        type: object
+                      autoBlock:
+                        description: |-
+                          block outbound connections if remote peer is detected as unreachable/unresponsive
+                          Whether to auto-block outbound connections if remote peer is detected as unreachable/unresponsive
+                        type: boolean
+                      blocked:
+                        description: |-
+                          (Boolean) Whether to block outbound connections on the repository
+                          Whether to block outbound connections on the repository
+                        type: boolean
+                      connection:
+                        description: (Attributes) HTTP Client Connection configuration
+                          for this Repository (see below for nested schema)
+                        properties:
+                          enableCircularRedirects:
+                            description: |-
+                              (Boolean) Whether to enable redirects to the same location (may be required by some servers)
+                              Whether to enable redirects to the same location (may be required by some servers)
+                            type: boolean
+                          enableCookies:
+                            description: |-
+                              (Boolean) Whether to allow cookies to be stored and used
+                              Whether to allow cookies to be stored and used
+                            type: boolean
+                          retries:
+                            description: |-
+                              (Number) Total retries if the initial connection attempt suffers a timeout
+                              Total retries if the initial connection attempt suffers a timeout
+                            type: number
+                          timeout:
+                            description: |-
+                              (Number) Seconds to wait for activity before stopping and retrying the connection
+                              Seconds to wait for activity before stopping and retrying the connection
+                            type: number
+                          useTrustStore:
+                            description: |-
+                              (Boolean) Use certificates stored in the Nexus Repository Manager truststore to connect to external systems
+                              Use certificates stored in the Nexus Repository Manager truststore to connect to external systems
+                            type: boolean
+                          userAgentSuffix:
+                            description: |-
+                              Agent header in HTTP requests
+                              Custom fragment to append to User-Agent header in HTTP requests
+                            type: string
+                        type: object
+                    type: object
+                  negativeCache:
+                    description: (Attributes) Negative Cache configuration for this
+                      Repository (see below for nested schema)
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Whether to cache responses for content not present in the proxied repository
+                          Whether to cache responses for content not present in the proxied repository
+                        type: boolean
+                      timeToLive:
+                        description: |-
+                          (Number) How long to cache the fact that a file was not found in the repository (in minutes)
+                          How long to cache the fact that a file was not found in the repository (in minutes)
+                        type: number
+                    type: object
+                  online:
+                    description: |-
+                      (Boolean) Whether this Repository is online and accepting incoming requests
+                      Whether this Repository is online and accepting incoming requests
+                    type: boolean
+                  proxy:
+                    description: (Attributes) Proxy specific configuration for this
+                      Repository (see below for nested schema)
+                    properties:
+                      contentMaxAge:
+                        description: |-
+                          (Number) How long to cache artifacts before rechecking the remote repository (in minutes)
+                          How long to cache artifacts before rechecking the remote repository (in minutes)
+                        type: number
+                      metadataMaxAge:
+                        description: |-
+                          (Number) How long to cache metadata before rechecking the remote repository (in minutes)
+                          How long to cache metadata before rechecking the remote repository (in minutes)
+                        type: number
+                      remoteUrl:
+                        description: |-
+                          (String) Location of the remote repository being proxied
+                          Location of the remote repository being proxied
+                        type: string
+                    type: object
+                  replication:
+                    description: (Attributes) Replication configuration for this Repository
+                      (see below for nested schema)
+                    properties:
+                      assetPathRegex:
+                        description: |-
+                          emptively pull
+                          Regular Expression of Asset Paths to pull pre-emptively pull
+                        type: string
+                      preemptivePullEnabled:
+                        description: |-
+                          emptive pull is enabled
+                          Whether pre-emptive pull is enabled
+                        type: boolean
+                    type: object
+                  repositoryFirewall:
+                    description: (Attributes) Sonatype Repository Firewall configuration
+                      for this Repository.
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Whether to cache responses for content not present in the proxied repository
+                          Whether to enable Sonatype Repository Firewall for this Repository
+                        type: boolean
+                      quarantine:
+                        description: |-
+                          just run in Audit mode) - see documentation.
+                          Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see [documentation](https://help.sonatype.com/en/firewall-quarantine.html).
+                        type: boolean
+                    type: object
+                  routingRule:
+                    description: |-
+                      (String) Routing Rule
+                      Routing Rule
+                    type: string
+                  storage:
+                    description: (Attributes) Storage configuration for this Repository
+                      (see below for nested schema)
+                    properties:
+                      blobStoreName:
+                        description: |-
+                          (String) Name of the Blob Store to use
+                          Name of the Blob Store to use
+                        type: string
+                      strictContentTypeValidation:
+                        description: |-
+                          (Boolean) Whether this Repository validates that all content uploaded to this repository is of a MIME type appropriate for the repository format
+                          Whether this Repository validates that all content uploaded to this repository is of a MIME type appropriate for the repository format
+                        type: boolean
+                    type: object
+                  url:
+                    description: |-
+                      (String) URL to access the Repository
+                      URL to access the Repository
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.docker is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.docker)
+                || (has(self.initProvider) && has(self.initProvider.docker))'
+            - message: spec.forProvider.dockerProxy is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dockerProxy)
+                || (has(self.initProvider) && has(self.initProvider.dockerProxy))'
+            - message: spec.forProvider.httpClient is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.httpClient)
+                || (has(self.initProvider) && has(self.initProvider.httpClient))'
+            - message: spec.forProvider.negativeCache is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.negativeCache)
+                || (has(self.initProvider) && has(self.initProvider.negativeCache))'
+            - message: spec.forProvider.online is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.online)
+                || (has(self.initProvider) && has(self.initProvider.online))'
+            - message: spec.forProvider.proxy is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.proxy)
+                || (has(self.initProvider) && has(self.initProvider.proxy))'
+            - message: spec.forProvider.storage is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storage)
+                || (has(self.initProvider) && has(self.initProvider.storage))'
+          status:
+            description: DockerProxyStatus defines the observed state of DockerProxy.
+            properties:
+              atProvider:
+                properties:
+                  cleanup:
+                    description: (Attributes) Repository Cleanup configuration (see
+                      below for nested schema)
+                    properties:
+                      policyNames:
+                        description: |-
+                          (Set of String) Set of Cleanup Policies that will apply to this Repository
+                          Set of Cleanup Policies that will apply to this Repository
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  docker:
+                    description: (Attributes) Docker specific configuration for this
+                      Repository (see below for nested schema)
+                    properties:
+                      forceBasicAuth:
+                        description: |-
+                          (Boolean) Whether to force authentication (Docker Bearer Token Realm required if false)
+                          Whether to force authentication (Docker Bearer Token Realm required if false)
+                        type: boolean
+                      httpPort:
+                        description: |-
+                          (Number) Create an HTTP connector at specified port
+                          Create an HTTP connector at specified port
+                        type: number
+                      httpsPort:
+                        description: |-
+                          (Number) Create an HTTPS connector at specified port
+                          Create an HTTPS connector at specified port
+                        type: number
+                      pathEnabled:
+                        description: |-
+                          (Boolean) Allows to use repository name in Docker image paths (only supply for Sonatype Nexus Repository Manager >= 3.83.0)
+                          Allows to use repository name in Docker image paths (only supply for Sonatype Nexus Repository Manager >= 3.83.0)
+                        type: boolean
+                      subdomain:
+                        description: |-
+                          (String) Allows to use subdomain
+                          Allows to use subdomain
+                        type: string
+                      v1Enabled:
+                        description: |-
+                          (Boolean) Whether to allow clients to use the V1 API to interact with this repository
+                          Whether to allow clients to use the V1 API to interact with this repository
+                        type: boolean
+                    type: object
+                  dockerProxy:
+                    description: (Attributes) Docker Proxy specific configuration
+                      for this Repository (see below for nested schema)
+                    properties:
+                      cacheForeignLayers:
+                        description: |-
+                          (Boolean) Allow Nexus Repository Manager to download and cache foreign layers
+                          Allow Nexus Repository Manager to download and cache foreign layers
+                        type: boolean
+                      foreignLayerUrlWhitelist:
+                        description: |-
+                          (Set of String) Foreign Layer URL Whitelist
+                          Foreign Layer URL Whitelist
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      indexType:
+                        description: |-
+                          (String) Type of Docker Index
+                          Type of Docker Index
+                        type: string
+                      indexUrl:
+                        description: |-
+                          (String) Url of Docker Index to use
+                          Url of Docker Index to use
+                        type: string
+                    type: object
+                  httpClient:
+                    description: (Attributes) HTTP Client configuration for this Repository
+                      (see below for nested schema)
+                    properties:
+                      authentication:
+                        description: (Attributes) Authentication to upstream Repository
+                          (see below for nested schema)
+                        properties:
+                          ntlmDomain:
+                            description: |-
+                              (String) NTLM Domain
+                              NTLM Domain
+                            type: string
+                          ntlmHost:
+                            description: |-
+                              (String) NTLM Host
+                              NTLM Host
+                            type: string
+                          preemptive:
+                            description: |-
+                              emptive authentication. Use with caution. Defaults to false.
+                              Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+                            type: boolean
+                          type:
+                            description: |-
+                              (String) Authentication type
+                              Authentication type
+                            type: string
+                          username:
+                            description: |-
+                              (String) Username
+                              Username
+                            type: string
+                        type: object
+                      autoBlock:
+                        description: |-
+                          block outbound connections if remote peer is detected as unreachable/unresponsive
+                          Whether to auto-block outbound connections if remote peer is detected as unreachable/unresponsive
+                        type: boolean
+                      blocked:
+                        description: |-
+                          (Boolean) Whether to block outbound connections on the repository
+                          Whether to block outbound connections on the repository
+                        type: boolean
+                      connection:
+                        description: (Attributes) HTTP Client Connection configuration
+                          for this Repository (see below for nested schema)
+                        properties:
+                          enableCircularRedirects:
+                            description: |-
+                              (Boolean) Whether to enable redirects to the same location (may be required by some servers)
+                              Whether to enable redirects to the same location (may be required by some servers)
+                            type: boolean
+                          enableCookies:
+                            description: |-
+                              (Boolean) Whether to allow cookies to be stored and used
+                              Whether to allow cookies to be stored and used
+                            type: boolean
+                          retries:
+                            description: |-
+                              (Number) Total retries if the initial connection attempt suffers a timeout
+                              Total retries if the initial connection attempt suffers a timeout
+                            type: number
+                          timeout:
+                            description: |-
+                              (Number) Seconds to wait for activity before stopping and retrying the connection
+                              Seconds to wait for activity before stopping and retrying the connection
+                            type: number
+                          useTrustStore:
+                            description: |-
+                              (Boolean) Use certificates stored in the Nexus Repository Manager truststore to connect to external systems
+                              Use certificates stored in the Nexus Repository Manager truststore to connect to external systems
+                            type: boolean
+                          userAgentSuffix:
+                            description: |-
+                              Agent header in HTTP requests
+                              Custom fragment to append to User-Agent header in HTTP requests
+                            type: string
+                        type: object
+                    type: object
+                  id:
+                    type: string
+                  lastUpdated:
+                    description: |-
+                      (String) String representation of the date/time the resource was last changed
+                      String representation of the date/time the resource was last changed
+                    type: string
+                  negativeCache:
+                    description: (Attributes) Negative Cache configuration for this
+                      Repository (see below for nested schema)
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Whether to cache responses for content not present in the proxied repository
+                          Whether to cache responses for content not present in the proxied repository
+                        type: boolean
+                      timeToLive:
+                        description: |-
+                          (Number) How long to cache the fact that a file was not found in the repository (in minutes)
+                          How long to cache the fact that a file was not found in the repository (in minutes)
+                        type: number
+                    type: object
+                  online:
+                    description: |-
+                      (Boolean) Whether this Repository is online and accepting incoming requests
+                      Whether this Repository is online and accepting incoming requests
+                    type: boolean
+                  proxy:
+                    description: (Attributes) Proxy specific configuration for this
+                      Repository (see below for nested schema)
+                    properties:
+                      contentMaxAge:
+                        description: |-
+                          (Number) How long to cache artifacts before rechecking the remote repository (in minutes)
+                          How long to cache artifacts before rechecking the remote repository (in minutes)
+                        type: number
+                      metadataMaxAge:
+                        description: |-
+                          (Number) How long to cache metadata before rechecking the remote repository (in minutes)
+                          How long to cache metadata before rechecking the remote repository (in minutes)
+                        type: number
+                      remoteUrl:
+                        description: |-
+                          (String) Location of the remote repository being proxied
+                          Location of the remote repository being proxied
+                        type: string
+                    type: object
+                  replication:
+                    description: (Attributes) Replication configuration for this Repository
+                      (see below for nested schema)
+                    properties:
+                      assetPathRegex:
+                        description: |-
+                          emptively pull
+                          Regular Expression of Asset Paths to pull pre-emptively pull
+                        type: string
+                      preemptivePullEnabled:
+                        description: |-
+                          emptive pull is enabled
+                          Whether pre-emptive pull is enabled
+                        type: boolean
+                    type: object
+                  repositoryFirewall:
+                    description: (Attributes) Sonatype Repository Firewall configuration
+                      for this Repository.
+                    properties:
+                      capabilityId:
+                        description: |-
+                          (String) Internal ID of the Audit & Quarantine Capability created for this Repository
+                          Internal ID of the Audit & Quarantine Capability created for this Repository
+                        type: string
+                      enabled:
+                        description: |-
+                          (Boolean) Whether to cache responses for content not present in the proxied repository
+                          Whether to enable Sonatype Repository Firewall for this Repository
+                        type: boolean
+                      quarantine:
+                        description: |-
+                          just run in Audit mode) - see documentation.
+                          Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see [documentation](https://help.sonatype.com/en/firewall-quarantine.html).
+                        type: boolean
+                    type: object
+                  routingRule:
+                    description: |-
+                      (String) Routing Rule
+                      Routing Rule
+                    type: string
+                  storage:
+                    description: (Attributes) Storage configuration for this Repository
+                      (see below for nested schema)
+                    properties:
+                      blobStoreName:
+                        description: |-
+                          (String) Name of the Blob Store to use
+                          Name of the Blob Store to use
+                        type: string
+                      strictContentTypeValidation:
+                        description: |-
+                          (Boolean) Whether this Repository validates that all content uploaded to this repository is of a MIME type appropriate for the repository format
+                          Whether this Repository validates that all content uploaded to this repository is of a MIME type appropriate for the repository format
+                        type: boolean
+                    type: object
+                  url:
+                    description: |-
+                      (String) URL to access the Repository
+                      URL to access the Repository
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

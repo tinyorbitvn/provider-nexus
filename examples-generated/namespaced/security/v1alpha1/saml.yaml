@@ -1,0 +1,19 @@
+apiVersion: security.nexus.m.tinyorbit.vn/v1alpha1
+kind: SAML
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1alpha1/saml
+  labels:
+    testing.upbound.io/example-name: saml_config
+  name: saml-config
+  namespace: crossplane-system
+spec:
+  forProvider:
+    emailAttribute: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+    firstNameAttribute: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname
+    groupsAttribute: http://schemas.xmlsoap.org/claims/Group
+    idpMetadata: ${file("/path/to/idp-metadata.xml")}
+    lastNameAttribute: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname
+    usernameAttribute: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier
+    validateAssertionSignature: true
+    validateResponseSignature: true

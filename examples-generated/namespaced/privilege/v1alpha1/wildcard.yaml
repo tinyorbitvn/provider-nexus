@@ -1,0 +1,13 @@
+apiVersion: privilege.nexus.m.tinyorbit.vn/v1alpha1
+kind: Wildcard
+metadata:
+  annotations:
+    meta.upbound.io/example-id: privilege/v1alpha1/wildcard
+  labels:
+    testing.upbound.io/example-name: wildcard_privilege
+  name: wildcard-privilege
+  namespace: crossplane-system
+spec:
+  forProvider:
+    description: Example wildcard privilege
+    pattern: nx-repository-view-*-*-browse

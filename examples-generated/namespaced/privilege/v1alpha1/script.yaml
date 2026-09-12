@@ -1,0 +1,16 @@
+apiVersion: privilege.nexus.m.tinyorbit.vn/v1alpha1
+kind: Script
+metadata:
+  annotations:
+    meta.upbound.io/example-id: privilege/v1alpha1/script
+  labels:
+    testing.upbound.io/example-name: script_privilege
+  name: script-privilege
+  namespace: crossplane-system
+spec:
+  forProvider:
+    actions:
+    - BROWSE
+    - RUN
+    description: Example script privilege
+    scriptName: example-script

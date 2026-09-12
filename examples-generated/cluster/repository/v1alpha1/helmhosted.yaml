@@ -1,0 +1,15 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: HelmHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/helmhosted
+  labels:
+    testing.upbound.io/example-name: helm_hosted
+  name: helm-hosted
+spec:
+  forProvider:
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true
+      writePolicy: ALLOW

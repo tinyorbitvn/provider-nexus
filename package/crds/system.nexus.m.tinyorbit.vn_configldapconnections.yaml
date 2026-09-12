@@ -1,0 +1,627 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.1
+  name: configldapconnections.system.nexus.m.tinyorbit.vn
+spec:
+  group: system.nexus.m.tinyorbit.vn
+  names:
+    categories:
+    - crossplane
+    - managed
+    - sonatyperepo
+    kind: ConfigLdapConnection
+    listKind: ConfigLdapConnectionList
+    plural: configldapconnections
+    singular: configldapconnection
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: ConfigLdapConnection is the Schema for the ConfigLdapConnections
+          API. <no value>
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ConfigLdapConnectionSpec defines the desired state of ConfigLdapConnection
+            properties:
+              forProvider:
+                properties:
+                  authPasswordSecretRef:
+                    description: The password to bind with. Required if authScheme
+                      other than NONE.
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  authRealm:
+                    description: The SASL realm to bind to. Required if authScheme
+                      is CRAM_MD5 or DIGEST_MD5.
+                    type: string
+                  authScheme:
+                    description: Authentication scheme used for connecting to LDAP
+                      server
+                    type: string
+                  authUsername:
+                    description: This must be a fully qualified username if simple
+                      authentication is used. Required if authScheme other than NONE.
+                    type: string
+                  connectionRetryDelay:
+                    description: How many seconds to wait before retrying
+                    type: number
+                  connectionTimeout:
+                    description: How many seconds to wait before timeout
+                    type: number
+                  groupBaseDn:
+                    description: The relative DN where group objects are found (e.g.
+                      ou=Group). This value will have the Search base DN value appended
+                      to form the full Group search base DN. e.g. ou=Group
+                    type: string
+                  groupIdAttribute:
+                    description: This field specifies the attribute of the Object
+                      class that defines the Group ID. Required if groupType is STATIC
+                      - e.g. cn
+                    type: string
+                  groupMemberAttribute:
+                    description: LDAP attribute containing the usernames for the group.
+                      Required if groupType is STATIC - e.g. memberUid
+                    type: string
+                  groupMemberFormat:
+                    description: The format of user ID stored in the group member
+                      attribute. Required if groupType is STATIC - e.g. uid=${username},ou=people,dc=example,dc=com
+                    type: string
+                  groupObjectClass:
+                    description: LDAP class for group objects. Required if groupType
+                      is STATIC - e.g. posixGroup
+                    type: string
+                  groupSubtree:
+                    description: Are groups located in structures below the group
+                      base DN?
+                    type: boolean
+                  groupType:
+                    description: 'Defines a type of groups used: static (a group contains
+                      a list of users) or dynamic (a user contains a list of groups).
+                      Required if ldapGroupsAsRoles is true.'
+                    type: string
+                  hostname:
+                    description: LDAP server hostname
+                    type: string
+                  mapLdapGroupsToRoles:
+                    description: Denotes whether LDAP assigned roles are used as Nexus
+                      Repository Manager roles
+                    type: boolean
+                  maxConnectionAttempts:
+                    description: How many connection attempts before giving up
+                    type: number
+                  name:
+                    description: LDAP connection name
+                    type: string
+                  nexusTrustStoreEnabled:
+                    description: Whether to use certificates stored in Nexus Repository
+                      Manager's truststore
+                    type: boolean
+                  order:
+                    description: Order number in which the server is being used when
+                      looking for a user - cannot be set during CREATE
+                    type: number
+                  port:
+                    description: LDAP server port
+                    type: number
+                  protocol:
+                    description: LDAP protocol to use
+                    type: string
+                  searchBase:
+                    description: LDAP location to be added to the connection URL
+                    type: string
+                  userBaseDn:
+                    description: The relative DN where user objects are found (e.g.
+                      ou=people). This value will have the Search base DN value appended
+                      to form the full User search base DN.
+                    type: string
+                  userEmailNameAttribute:
+                    description: This is used to find an email address given the user
+                      ID - e.g. mail
+                    type: string
+                  userIdAttribute:
+                    description: This is used to find a user given its user ID - e.g.
+                      uid
+                    type: string
+                  userLdapFilter:
+                    description: LDAP search filter to limit user search - e.g. (|(mail=*@example.com)(uid=dom*))
+                    type: string
+                  userMemberOfAttribute:
+                    description: Set this to the attribute used to store the attribute
+                      which holds groups DN in the user object. Required if group_type
+                      is DYNAMIC
+                    type: string
+                  userObjectClass:
+                    description: LDAP class for user objects - e.g. inetOrgPerson
+                    type: string
+                  userPasswordAttribute:
+                    description: If this field is blank the user will be authenticated
+                      against a bind with the LDAP server
+                    type: string
+                  userRealNameAttribute:
+                    description: This is used to find a real name given the user ID
+                      - e.g. cn
+                    type: string
+                  userSubtree:
+                    description: Are users located in structures below the user base
+                      DN?
+                    type: boolean
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  authPasswordSecretRef:
+                    description: The password to bind with. Required if authScheme
+                      other than NONE.
+                    properties:
+                      key:
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    type: object
+                  authRealm:
+                    description: The SASL realm to bind to. Required if authScheme
+                      is CRAM_MD5 or DIGEST_MD5.
+                    type: string
+                  authScheme:
+                    description: Authentication scheme used for connecting to LDAP
+                      server
+                    type: string
+                  authUsername:
+                    description: This must be a fully qualified username if simple
+                      authentication is used. Required if authScheme other than NONE.
+                    type: string
+                  connectionRetryDelay:
+                    description: How many seconds to wait before retrying
+                    type: number
+                  connectionTimeout:
+                    description: How many seconds to wait before timeout
+                    type: number
+                  groupBaseDn:
+                    description: The relative DN where group objects are found (e.g.
+                      ou=Group). This value will have the Search base DN value appended
+                      to form the full Group search base DN. e.g. ou=Group
+                    type: string
+                  groupIdAttribute:
+                    description: This field specifies the attribute of the Object
+                      class that defines the Group ID. Required if groupType is STATIC
+                      - e.g. cn
+                    type: string
+                  groupMemberAttribute:
+                    description: LDAP attribute containing the usernames for the group.
+                      Required if groupType is STATIC - e.g. memberUid
+                    type: string
+                  groupMemberFormat:
+                    description: The format of user ID stored in the group member
+                      attribute. Required if groupType is STATIC - e.g. uid=${username},ou=people,dc=example,dc=com
+                    type: string
+                  groupObjectClass:
+                    description: LDAP class for group objects. Required if groupType
+                      is STATIC - e.g. posixGroup
+                    type: string
+                  groupSubtree:
+                    description: Are groups located in structures below the group
+                      base DN?
+                    type: boolean
+                  groupType:
+                    description: 'Defines a type of groups used: static (a group contains
+                      a list of users) or dynamic (a user contains a list of groups).
+                      Required if ldapGroupsAsRoles is true.'
+                    type: string
+                  hostname:
+                    description: LDAP server hostname
+                    type: string
+                  mapLdapGroupsToRoles:
+                    description: Denotes whether LDAP assigned roles are used as Nexus
+                      Repository Manager roles
+                    type: boolean
+                  maxConnectionAttempts:
+                    description: How many connection attempts before giving up
+                    type: number
+                  name:
+                    description: LDAP connection name
+                    type: string
+                  nexusTrustStoreEnabled:
+                    description: Whether to use certificates stored in Nexus Repository
+                      Manager's truststore
+                    type: boolean
+                  order:
+                    description: Order number in which the server is being used when
+                      looking for a user - cannot be set during CREATE
+                    type: number
+                  port:
+                    description: LDAP server port
+                    type: number
+                  protocol:
+                    description: LDAP protocol to use
+                    type: string
+                  searchBase:
+                    description: LDAP location to be added to the connection URL
+                    type: string
+                  userBaseDn:
+                    description: The relative DN where user objects are found (e.g.
+                      ou=people). This value will have the Search base DN value appended
+                      to form the full User search base DN.
+                    type: string
+                  userEmailNameAttribute:
+                    description: This is used to find an email address given the user
+                      ID - e.g. mail
+                    type: string
+                  userIdAttribute:
+                    description: This is used to find a user given its user ID - e.g.
+                      uid
+                    type: string
+                  userLdapFilter:
+                    description: LDAP search filter to limit user search - e.g. (|(mail=*@example.com)(uid=dom*))
+                    type: string
+                  userMemberOfAttribute:
+                    description: Set this to the attribute used to store the attribute
+                      which holds groups DN in the user object. Required if group_type
+                      is DYNAMIC
+                    type: string
+                  userObjectClass:
+                    description: LDAP class for user objects - e.g. inetOrgPerson
+                    type: string
+                  userPasswordAttribute:
+                    description: If this field is blank the user will be authenticated
+                      against a bind with the LDAP server
+                    type: string
+                  userRealNameAttribute:
+                    description: This is used to find a real name given the user ID
+                      - e.g. cn
+                    type: string
+                  userSubtree:
+                    description: Are users located in structures below the user base
+                      DN?
+                    type: boolean
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  kind: ClusterProviderConfig
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  kind:
+                    description: Kind of the referenced object.
+                    type: string
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - kind
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                required:
+                - name
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.authScheme is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authScheme)
+                || (has(self.initProvider) && has(self.initProvider.authScheme))'
+            - message: spec.forProvider.hostname is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.hostname)
+                || (has(self.initProvider) && has(self.initProvider.hostname))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.port is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.port)
+                || (has(self.initProvider) && has(self.initProvider.port))'
+            - message: spec.forProvider.protocol is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
+                || (has(self.initProvider) && has(self.initProvider.protocol))'
+            - message: spec.forProvider.searchBase is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.searchBase)
+                || (has(self.initProvider) && has(self.initProvider.searchBase))'
+            - message: spec.forProvider.userEmailNameAttribute is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.userEmailNameAttribute)
+                || (has(self.initProvider) && has(self.initProvider.userEmailNameAttribute))'
+            - message: spec.forProvider.userIdAttribute is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.userIdAttribute)
+                || (has(self.initProvider) && has(self.initProvider.userIdAttribute))'
+            - message: spec.forProvider.userObjectClass is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.userObjectClass)
+                || (has(self.initProvider) && has(self.initProvider.userObjectClass))'
+            - message: spec.forProvider.userRealNameAttribute is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.userRealNameAttribute)
+                || (has(self.initProvider) && has(self.initProvider.userRealNameAttribute))'
+          status:
+            description: ConfigLdapConnectionStatus defines the observed state of
+              ConfigLdapConnection.
+            properties:
+              atProvider:
+                properties:
+                  authRealm:
+                    description: The SASL realm to bind to. Required if authScheme
+                      is CRAM_MD5 or DIGEST_MD5.
+                    type: string
+                  authScheme:
+                    description: Authentication scheme used for connecting to LDAP
+                      server
+                    type: string
+                  authUsername:
+                    description: This must be a fully qualified username if simple
+                      authentication is used. Required if authScheme other than NONE.
+                    type: string
+                  connectionRetryDelay:
+                    description: How many seconds to wait before retrying
+                    type: number
+                  connectionTimeout:
+                    description: How many seconds to wait before timeout
+                    type: number
+                  groupBaseDn:
+                    description: The relative DN where group objects are found (e.g.
+                      ou=Group). This value will have the Search base DN value appended
+                      to form the full Group search base DN. e.g. ou=Group
+                    type: string
+                  groupIdAttribute:
+                    description: This field specifies the attribute of the Object
+                      class that defines the Group ID. Required if groupType is STATIC
+                      - e.g. cn
+                    type: string
+                  groupMemberAttribute:
+                    description: LDAP attribute containing the usernames for the group.
+                      Required if groupType is STATIC - e.g. memberUid
+                    type: string
+                  groupMemberFormat:
+                    description: The format of user ID stored in the group member
+                      attribute. Required if groupType is STATIC - e.g. uid=${username},ou=people,dc=example,dc=com
+                    type: string
+                  groupObjectClass:
+                    description: LDAP class for group objects. Required if groupType
+                      is STATIC - e.g. posixGroup
+                    type: string
+                  groupSubtree:
+                    description: Are groups located in structures below the group
+                      base DN?
+                    type: boolean
+                  groupType:
+                    description: 'Defines a type of groups used: static (a group contains
+                      a list of users) or dynamic (a user contains a list of groups).
+                      Required if ldapGroupsAsRoles is true.'
+                    type: string
+                  hostname:
+                    description: LDAP server hostname
+                    type: string
+                  id:
+                    type: string
+                  lastUpdated:
+                    description: String representation of the date/time the resource
+                      was last changed
+                    type: string
+                  mapLdapGroupsToRoles:
+                    description: Denotes whether LDAP assigned roles are used as Nexus
+                      Repository Manager roles
+                    type: boolean
+                  maxConnectionAttempts:
+                    description: How many connection attempts before giving up
+                    type: number
+                  name:
+                    description: LDAP connection name
+                    type: string
+                  nexusTrustStoreEnabled:
+                    description: Whether to use certificates stored in Nexus Repository
+                      Manager's truststore
+                    type: boolean
+                  order:
+                    description: Order number in which the server is being used when
+                      looking for a user - cannot be set during CREATE
+                    type: number
+                  port:
+                    description: LDAP server port
+                    type: number
+                  protocol:
+                    description: LDAP protocol to use
+                    type: string
+                  searchBase:
+                    description: LDAP location to be added to the connection URL
+                    type: string
+                  userBaseDn:
+                    description: The relative DN where user objects are found (e.g.
+                      ou=people). This value will have the Search base DN value appended
+                      to form the full User search base DN.
+                    type: string
+                  userEmailNameAttribute:
+                    description: This is used to find an email address given the user
+                      ID - e.g. mail
+                    type: string
+                  userIdAttribute:
+                    description: This is used to find a user given its user ID - e.g.
+                      uid
+                    type: string
+                  userLdapFilter:
+                    description: LDAP search filter to limit user search - e.g. (|(mail=*@example.com)(uid=dom*))
+                    type: string
+                  userMemberOfAttribute:
+                    description: Set this to the attribute used to store the attribute
+                      which holds groups DN in the user object. Required if group_type
+                      is DYNAMIC
+                    type: string
+                  userObjectClass:
+                    description: LDAP class for user objects - e.g. inetOrgPerson
+                    type: string
+                  userPasswordAttribute:
+                    description: If this field is blank the user will be authenticated
+                      against a bind with the LDAP server
+                    type: string
+                  userRealNameAttribute:
+                    description: This is used to find a real name given the user ID
+                      - e.g. cn
+                    type: string
+                  userSubtree:
+                    description: Are users located in structures below the user base
+                      DN?
+                    type: boolean
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              lastHandledReconcileAt:
+                description: |-
+                  LastHandledReconcileAt holds the value of the most recent
+                  reconcile-requested-at annotation token that the controller has
+                  processed. Users can compare this to the annotation to determine
+                  whether a reconcile request has been handled.
+                type: string
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

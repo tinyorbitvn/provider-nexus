@@ -1,0 +1,19 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: CargoGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/cargogroup
+  labels:
+    testing.upbound.io/example-name: cargo_group
+  name: cargo-group
+  namespace: crossplane-system
+spec:
+  forProvider:
+    group:
+      member_repositories:
+      - cargo-proxy-repo
+      - cargo-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

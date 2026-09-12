@@ -1,0 +1,15 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: AnsiblegalaxyHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/ansiblegalaxyhosted
+  labels:
+    testing.upbound.io/example-name: ansiblegalaxy_hosted
+  name: ansiblegalaxy-hosted
+spec:
+  forProvider:
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+      writePolicy: ALLOW

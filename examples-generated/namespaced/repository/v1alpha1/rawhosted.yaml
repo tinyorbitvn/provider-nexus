@@ -1,0 +1,16 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: RawHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/rawhosted
+  labels:
+    testing.upbound.io/example-name: raw_hosted
+  name: raw-hosted
+  namespace: crossplane-system
+spec:
+  forProvider:
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+      writePolicy: ALLOW

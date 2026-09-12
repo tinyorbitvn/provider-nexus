@@ -1,0 +1,34 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: Maven2Proxy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/maven2proxy
+  labels:
+    testing.upbound.io/example-name: maven_proxy
+  name: maven-proxy
+  namespace: crossplane-system
+spec:
+  forProvider:
+    httpClient:
+      autoBlock: false
+      blocked: false
+      connection:
+        enableCircularRedirects: true
+        enableCookies: true
+        retries: 0
+        timeout: 60
+        useTrustStore: false
+    maven:
+      layoutPolicy: STRICT
+      versionPolicy: RELEASE
+    negativeCache:
+      enabled: true
+      timeToLive: 1440
+    online: true
+    proxy:
+      contentMaxAge: 1440
+      metadataMaxAge: 1440
+      remoteUrl: https://repo.maven.apache.org/maven2
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true

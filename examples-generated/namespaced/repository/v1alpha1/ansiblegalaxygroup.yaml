@@ -1,0 +1,19 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: AnsiblegalaxyGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/ansiblegalaxygroup
+  labels:
+    testing.upbound.io/example-name: ansiblegalaxy_group
+  name: ansiblegalaxy-group
+  namespace: crossplane-system
+spec:
+  forProvider:
+    group:
+      memberNames:
+      - ansiblegalaxy-proxy-repo
+      - ansiblegalaxy-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

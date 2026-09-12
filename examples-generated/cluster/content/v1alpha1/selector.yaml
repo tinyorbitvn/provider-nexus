@@ -1,0 +1,12 @@
+apiVersion: content.nexus.tinyorbit.vn/v1alpha1
+kind: Selector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: content/v1alpha1/selector
+  labels:
+    testing.upbound.io/example-name: cs1
+  name: cs1
+spec:
+  forProvider:
+    description: This is a test content selector
+    expression: format == "maven2" and path =^ "/org/sonatype/sub"

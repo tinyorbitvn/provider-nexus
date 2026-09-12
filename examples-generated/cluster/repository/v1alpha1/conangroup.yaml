@@ -1,0 +1,18 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: ConanGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/conangroup
+  labels:
+    testing.upbound.io/example-name: conan_group
+  name: conan-group
+spec:
+  forProvider:
+    group:
+      member_repositories:
+      - conan-proxy-repo
+      - conan-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

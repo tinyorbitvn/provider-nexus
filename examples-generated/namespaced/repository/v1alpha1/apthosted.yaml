@@ -1,0 +1,26 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: AptHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/apthosted
+  labels:
+    testing.upbound.io/example-name: apt_hosted
+  name: apt-hosted
+  namespace: crossplane-system
+spec:
+  forProvider:
+    apt:
+      distribution: bionic
+    aptSigning:
+      keyPair: |-
+        -----BEGIN PGP PRIVATE KEY BLOCK-----
+        ...
+        -----END PGP PRIVATE KEY BLOCK-----
+      passphraseSecretRef:
+        key: example-key
+        name: example-secret
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true
+      writePolicy: ALLOW

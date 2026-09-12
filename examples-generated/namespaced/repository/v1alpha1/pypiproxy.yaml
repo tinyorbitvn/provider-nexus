@@ -1,0 +1,31 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: PypiProxy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/pypiproxy
+  labels:
+    testing.upbound.io/example-name: pypi_proxy
+  name: pypi-proxy
+  namespace: crossplane-system
+spec:
+  forProvider:
+    httpClient:
+      autoBlock: false
+      blocked: false
+      connection:
+        enableCircularRedirects: true
+        enableCookies: true
+        retries: 0
+        timeout: 60
+        useTrustStore: false
+    negativeCache:
+      enabled: true
+      timeToLive: 1440
+    online: true
+    proxy:
+      contentMaxAge: 1440
+      metadataMaxAge: 1440
+      remoteUrl: https://pypi.org
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

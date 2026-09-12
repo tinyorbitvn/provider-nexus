@@ -1,0 +1,17 @@
+apiVersion: task.nexus.tinyorbit.vn/v1alpha1
+kind: RepairCreateBrowseNodes
+metadata:
+  annotations:
+    meta.upbound.io/example-id: task/v1alpha1/repaircreatebrowsenodes
+  labels:
+    testing.upbound.io/example-name: repair_browse_nodes
+  name: repair-browse-nodes
+spec:
+  forProvider:
+    enabled: true
+    frequency:
+      schedule: manual
+    name: repair-browse-nodes-task
+    notificationCondition: FAILURE
+    properties:
+      repositoryName: '*'

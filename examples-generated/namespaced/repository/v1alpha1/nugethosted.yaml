@@ -1,0 +1,16 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: NugetHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/nugethosted
+  labels:
+    testing.upbound.io/example-name: nuget_hosted
+  name: nuget-hosted
+  namespace: crossplane-system
+spec:
+  forProvider:
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true
+      writePolicy: ALLOW

@@ -1,0 +1,17 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: GoGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/gogroup
+  labels:
+    testing.upbound.io/example-name: go_group
+  name: go-group
+spec:
+  forProvider:
+    group:
+      member_repositories:
+      - go-proxy-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

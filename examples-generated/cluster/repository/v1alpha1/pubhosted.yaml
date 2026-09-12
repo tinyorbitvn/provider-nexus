@@ -1,0 +1,17 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: PubHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/pubhosted
+  labels:
+    testing.upbound.io/example-name: pub_hosted
+  name: pub-hosted
+spec:
+  forProvider:
+    component:
+      proprietaryComponents: false
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+      writePolicy: ALLOW

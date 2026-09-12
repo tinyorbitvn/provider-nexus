@@ -1,0 +1,12 @@
+apiVersion: capability.nexus.tinyorbit.vn/v1alpha1
+kind: StorageSettings
+metadata:
+  annotations:
+    meta.upbound.io/example-id: capability/v1alpha1/storagesettings
+  labels:
+    testing.upbound.io/example-name: storage_settings
+  name: storage-settings
+spec:
+  forProvider:
+    enabled: true
+    notes: Storage settings configuration

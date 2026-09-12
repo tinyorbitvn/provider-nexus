@@ -1,0 +1,17 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: SwiftGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/swiftgroup
+  labels:
+    testing.upbound.io/example-name: swift_group
+  name: swift-group
+spec:
+  forProvider:
+    group:
+      memberNames:
+      - swift-proxy-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false

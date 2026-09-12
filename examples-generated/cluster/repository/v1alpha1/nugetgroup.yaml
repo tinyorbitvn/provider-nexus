@@ -1,0 +1,18 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: NugetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/nugetgroup
+  labels:
+    testing.upbound.io/example-name: nuget_group
+  name: nuget-group
+spec:
+  forProvider:
+    group:
+      member_repositories:
+      - nuget-proxy-repo
+      - nuget-hosted-repo
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true

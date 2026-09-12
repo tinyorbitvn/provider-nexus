@@ -1,0 +1,15 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: PypiHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/pypihosted
+  labels:
+    testing.upbound.io/example-name: pypi_hosted
+  name: pypi-hosted
+spec:
+  forProvider:
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: false
+      writePolicy: ALLOW

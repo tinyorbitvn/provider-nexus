@@ -1,0 +1,19 @@
+apiVersion: repository.nexus.tinyorbit.vn/v1alpha1
+kind: DockerHosted
+metadata:
+  annotations:
+    meta.upbound.io/example-id: repository/v1alpha1/dockerhosted
+  labels:
+    testing.upbound.io/example-name: docker_hosted
+  name: docker-hosted
+spec:
+  forProvider:
+    docker:
+      forceBasicAuth: true
+      httpPort: 8082
+      v1Enabled: false
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true
+      writePolicy: ALLOW
