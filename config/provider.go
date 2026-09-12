@@ -26,7 +26,13 @@ var providerMetadata string
 func GetProvider() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithRootGroup("nexus.tinyorbit.vn"),
-		ujconfig.WithIncludeList(ExternalNameConfigured()),
+		// IncludeList (the Terraform-CLI list) stays nil: no resource is
+		// reconciled via the Terraform CLI here. Passing the same 119 names
+		// to both IncludeList and TerraformPluginFrameworkIncludeList makes
+		// upjet panic with "specified in more than one include list" for
+		// every resource (hit during `make generate` 2026-09-13) — a
+		// resource may appear in at most one of the three lists.
+		ujconfig.WithIncludeList(nil),
 		// Every resource is served in-process by the embedded plugin-framework
 		// provider; nothing falls back to the Terraform CLI.
 		ujconfig.WithTerraformPluginFrameworkIncludeList(ExternalNameConfigured()),
@@ -45,7 +51,9 @@ func GetProvider() *ujconfig.Provider {
 func GetProviderNamespaced() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithRootGroup("nexus.m.tinyorbit.vn"),
-		ujconfig.WithIncludeList(ExternalNameConfigured()),
+		// See GetProvider: IncludeList must stay nil, or every resource
+		// collides with TerraformPluginFrameworkIncludeList below.
+		ujconfig.WithIncludeList(nil),
 		// Every resource is served in-process by the embedded plugin-framework
 		// provider; nothing falls back to the Terraform CLI.
 		ujconfig.WithTerraformPluginFrameworkIncludeList(ExternalNameConfigured()),
