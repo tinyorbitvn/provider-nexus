@@ -1,0 +1,13 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: RawHosted
+metadata:
+  name: casc-smoke
+  namespace: nexus
+spec:
+  providerConfigRef: { name: default, kind: ProviderConfig }
+  forProvider:
+    online: true
+    storage:
+      blobStoreName: default
+      strictContentTypeValidation: true
+      writePolicy: ALLOW

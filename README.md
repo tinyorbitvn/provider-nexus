@@ -44,6 +44,7 @@ spec:
     source: Secret
     secretRef:
       name: nexus-admin
+      namespace: nexus
       key: NEXUS_ADMIN_PASSWORD   # raw password, not JSON
 ```
 
