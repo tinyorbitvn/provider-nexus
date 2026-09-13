@@ -7,6 +7,7 @@ spec:
   providerConfigRef: { name: default, kind: ProviderConfig }
   forProvider:
     online: true
+    raw: {}
     storage:
       blobStoreName: default
       strictContentTypeValidation: true
