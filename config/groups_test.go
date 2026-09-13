@@ -6,6 +6,12 @@ import (
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 )
 
+// unsetShortGroup is the placeholder ShortGroup fed into GroupKindOverrides
+// in each case below (standing in for whatever Upjet's own default naming
+// would have produced), and also the expected ShortGroup for the ruby_gems
+// aliases, which only override Kind (see the comment on those cases).
+const unsetShortGroup = "default"
+
 func TestGroupKindOverrides(t *testing.T) {
 	cases := map[string]struct{ group, kind string }{
 		"sonatyperepo_blob_store_s3":    {"blobstore", "S3"},
@@ -20,13 +26,13 @@ func TestGroupKindOverrides(t *testing.T) {
 		// same generated filename and one clobbers the other on disk during
 		// `make generate` (hit 2026-09-13). Only Kind is overridden here;
 		// ShortGroup keeps Upjet's default ("repository"), which is why the
-		// expectation below is "default" — same as the untouched cases.
-		"sonatyperepo_repository_ruby_gems_group":  {"default", "RubygemsLegacyGroup"},
-		"sonatyperepo_repository_ruby_gems_hosted": {"default", "RubygemsLegacyHosted"},
-		"sonatyperepo_repository_ruby_gems_proxy":  {"default", "RubygemsLegacyProxy"},
+		// expectation below is unsetShortGroup — same as the untouched cases.
+		"sonatyperepo_repository_ruby_gems_group":  {unsetShortGroup, "RubygemsLegacyGroup"},
+		"sonatyperepo_repository_ruby_gems_hosted": {unsetShortGroup, "RubygemsLegacyHosted"},
+		"sonatyperepo_repository_ruby_gems_proxy":  {unsetShortGroup, "RubygemsLegacyProxy"},
 	}
 	for name, want := range cases {
-		r := &ujconfig.Resource{Name: name, ShortGroup: "default", Kind: "Default"}
+		r := &ujconfig.Resource{Name: name, ShortGroup: unsetShortGroup, Kind: "Default"}
 		GroupKindOverrides()(r)
 		if r.ShortGroup != want.group || r.Kind != want.kind {
 			t.Errorf("%s: got %s/%s, want %s/%s", name, r.ShortGroup, r.Kind, want.group, want.kind)
