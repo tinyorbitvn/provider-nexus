@@ -18,4 +18,3 @@ spec:
     roles:
     - nx-anonymous
     status: active
-    userId: test-local-user
