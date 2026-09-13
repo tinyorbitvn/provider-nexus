@@ -91,8 +91,8 @@ External names (see `config/external_name.go` for the full reasoning):
    Delete for singletons is not a no-op: `AnonymousAccess` → sets
    `enabled=false`; `ConfigHttp` → resets HTTP settings; `SsrfProtection` →
    overwrites; `UserTokens` → disables; `ConfigMail` → deletes the mail
-   config (see the fork's `internal/provider/system/*_resource.go` /
-   `security/*_resource.go`). A GitOps prune therefore reconfigures the live
+   config (see the fork's `internal/provider/system/*_resource.go`). A GitOps
+   prune therefore reconfigures the live
    server — set `spec.deletionPolicy: Orphan` on singleton MRs unless that is
    intended.
 3. **`secretRef.namespace`** is required by the CRD in both scopes; for the
