@@ -198,7 +198,9 @@ func main() {
 		// terraform.WithProviderRunner(terraform.NewSharedProvider(log, os.Getenv("TERRAFORM_NATIVE_PROVIDER_PATH"), terraform.WithNativeProviderArgs("-debuggable")))
 		WorkspaceStore: terraform.NewWorkspaceStore(log),
 		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion),
-		StartWebhooks:  *certsDir != "",
+		// Required by the plugin-framework (in-process) connectors; the template omits it because its null provider ran in CLI mode.
+		OperationTrackerStore: tjcontroller.NewOperationStore(log),
+		StartWebhooks:         *certsDir != "",
 	}
 
 	namespacedOpts := tjcontroller.Options{
@@ -219,7 +221,9 @@ func main() {
 		// terraform.WithProviderRunner(terraform.NewSharedProvider(log, os.Getenv("TERRAFORM_NATIVE_PROVIDER_PATH"), terraform.WithNativeProviderArgs("-debuggable")))
 		WorkspaceStore: terraform.NewWorkspaceStore(log),
 		SetupFn:        clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion),
-		StartWebhooks:  *certsDir != "",
+		// Required by the plugin-framework (in-process) connectors; the template omits it because its null provider ran in CLI mode.
+		OperationTrackerStore: tjcontroller.NewOperationStore(log),
+		StartWebhooks:         *certsDir != "",
 	}
 
 	if *enableManagementPolicies {
