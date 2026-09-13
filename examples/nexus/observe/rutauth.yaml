@@ -1,0 +1,11 @@
+apiVersion: capability.nexus.m.tinyorbit.vn/v1alpha1
+kind: RutAuth
+metadata:
+  name: rutauth
+  namespace: nexus
+  annotations:
+    crossplane.io/external-name: "01a09037-0629-1df1-30ad-692aad893838"
+spec:
+  managementPolicies: ["Observe"]
+  providerConfigRef: { name: default, kind: ProviderConfig }
+  forProvider: {}

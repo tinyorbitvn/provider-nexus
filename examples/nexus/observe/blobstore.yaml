@@ -1,0 +1,11 @@
+apiVersion: blobstore.nexus.m.tinyorbit.vn/v1alpha1
+kind: S3
+metadata:
+  name: nexus-blobs
+  namespace: nexus
+  annotations:
+    crossplane.io/external-name: nexus-blobs
+spec:
+  managementPolicies: ["Observe"]
+  providerConfigRef: { name: default, kind: ProviderConfig }
+  forProvider: {}

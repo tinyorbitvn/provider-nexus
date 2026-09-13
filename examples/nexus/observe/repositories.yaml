@@ -1,0 +1,35 @@
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: DockerHosted
+metadata:
+  name: docker-hosted
+  namespace: nexus
+  annotations:
+    crossplane.io/external-name: docker-hosted
+spec:
+  managementPolicies: ["Observe"]
+  providerConfigRef: { name: default, kind: ProviderConfig }
+  forProvider: {}
+---
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: DockerProxy
+metadata:
+  name: docker-proxy
+  namespace: nexus
+  annotations:
+    crossplane.io/external-name: docker-proxy
+spec:
+  managementPolicies: ["Observe"]
+  providerConfigRef: { name: default, kind: ProviderConfig }
+  forProvider: {}
+---
+apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
+kind: DockerGroup
+metadata:
+  name: docker-group
+  namespace: nexus
+  annotations:
+    crossplane.io/external-name: docker-group
+spec:
+  managementPolicies: ["Observe"]
+  providerConfigRef: { name: default, kind: ProviderConfig }
+  forProvider: {}
