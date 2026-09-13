@@ -130,11 +130,6 @@ spec:
 
                       **Note:** This can only be managed for local users - and not LDAP, CROWD or SAML users.
                     type: string
-                  userId:
-                    description: |-
-                      (String) The userid which is required for login. This value cannot be changed.
-                      The userid which is required for login. This value cannot be changed.
-                    type: string
                 type: object
               initProvider:
                 description: |-
@@ -205,11 +200,6 @@ spec:
                       The user's status.
 
                       **Note:** This can only be managed for local users - and not LDAP, CROWD or SAML users.
-                    type: string
-                  userId:
-                    description: |-
-                      (String) The userid which is required for login. This value cannot be changed.
-                      The userid which is required for login. This value cannot be changed.
                     type: string
                 type: object
               managementPolicies:
@@ -319,10 +309,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.status)
                 || (has(self.initProvider) && has(self.initProvider.status))'
-            - message: spec.forProvider.userId is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.userId)
-                || (has(self.initProvider) && has(self.initProvider.userId))'
           status:
             description: UserStatus defines the observed state of User.
             properties:
@@ -380,11 +366,6 @@ spec:
                       The user's status.
 
                       **Note:** This can only be managed for local users - and not LDAP, CROWD or SAML users.
-                    type: string
-                  userId:
-                    description: |-
-                      (String) The userid which is required for login. This value cannot be changed.
-                      The userid which is required for login. This value cannot be changed.
                     type: string
                 type: object
               conditions:

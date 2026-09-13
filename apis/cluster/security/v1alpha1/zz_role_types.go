@@ -19,6 +19,10 @@ type RoleInitParameters struct {
 	// The description of this role.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) The name of the role.
+	// The name of the role.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// (Set of String) The set of privileges assigned to this role.
 	// The set of privileges assigned to this role.
 	// +listType=set
@@ -43,6 +47,10 @@ type RoleObservation struct {
 	// String representation of the date/time the resource was last changed
 	LastUpdated *string `json:"lastUpdated,omitempty" tf:"last_updated,omitempty"`
 
+	// (String) The name of the role.
+	// The name of the role.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// (Set of String) The set of privileges assigned to this role.
 	// The set of privileges assigned to this role.
 	// +listType=set
@@ -60,6 +68,11 @@ type RoleParameters struct {
 	// The description of this role.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (String) The name of the role.
+	// The name of the role.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Set of String) The set of privileges assigned to this role.
 	// The set of privileges assigned to this role.
@@ -111,6 +124,7 @@ type Role struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || (has(self.initProvider) && has(self.initProvider.description))",message="spec.forProvider.description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   RoleSpec   `json:"spec"`
 	Status RoleStatus `json:"status,omitempty"`
 }

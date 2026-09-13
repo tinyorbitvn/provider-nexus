@@ -64,6 +64,11 @@ spec:
                       (String) The description of this role.
                       The description of this role.
                     type: string
+                  name:
+                    description: |-
+                      (String) The name of the role.
+                      The name of the role.
+                    type: string
                   privileges:
                     description: |-
                       (Set of String) The set of privileges assigned to this role.
@@ -98,6 +103,11 @@ spec:
                     description: |-
                       (String) The description of this role.
                       The description of this role.
+                    type: string
+                  name:
+                    description: |-
+                      (String) The name of the role.
+                      The name of the role.
                     type: string
                   privileges:
                     description: |-
@@ -179,6 +189,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
                 || (has(self.initProvider) && has(self.initProvider.description))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: RoleStatus defines the observed state of Role.
             properties:
@@ -196,6 +210,11 @@ spec:
                     description: |-
                       (String) String representation of the date/time the resource was last changed
                       String representation of the date/time the resource was last changed
+                    type: string
+                  name:
+                    description: |-
+                      (String) The name of the role.
+                      The name of the role.
                     type: string
                   privileges:
                     description: |-

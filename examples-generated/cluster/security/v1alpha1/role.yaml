@@ -9,5 +9,6 @@ metadata:
 spec:
   forProvider:
     description: Administrator role
+    name: nx-admin
     privileges:
     - nx-all

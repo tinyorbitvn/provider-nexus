@@ -49,10 +49,6 @@ type UserInitParameters struct {
 	//
 	// **Note:** This can only be managed for local users - and not LDAP, CROWD or SAML users.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
-
-	// (String) The userid which is required for login. This value cannot be changed.
-	// The userid which is required for login. This value cannot be changed.
-	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type UserObservation struct {
@@ -99,10 +95,6 @@ type UserObservation struct {
 	//
 	// **Note:** This can only be managed for local users - and not LDAP, CROWD or SAML users.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
-
-	// (String) The userid which is required for login. This value cannot be changed.
-	// The userid which is required for login. This value cannot be changed.
-	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type UserParameters struct {
@@ -147,11 +139,6 @@ type UserParameters struct {
 	// **Note:** This can only be managed for local users - and not LDAP, CROWD or SAML users.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
-
-	// (String) The userid which is required for login. This value cannot be changed.
-	// The userid which is required for login. This value cannot be changed.
-	// +kubebuilder:validation:Optional
-	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 // UserSpec defines the desired state of User
@@ -195,7 +182,6 @@ type User struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lastName) || (has(self.initProvider) && has(self.initProvider.lastName))",message="spec.forProvider.lastName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roles) || (has(self.initProvider) && has(self.initProvider.roles))",message="spec.forProvider.roles is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.status) || (has(self.initProvider) && has(self.initProvider.status))",message="spec.forProvider.status is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.userId) || (has(self.initProvider) && has(self.initProvider.userId))",message="spec.forProvider.userId is a required parameter"
 	Spec   UserSpec   `json:"spec"`
 	Status UserStatus `json:"status,omitempty"`
 }
