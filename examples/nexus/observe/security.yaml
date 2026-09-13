@@ -16,7 +16,11 @@ metadata:
   name: anonymous
   namespace: nexus
   annotations:
-    crossplane.io/external-name: ANONYMOUS_ACCESS
+    # system_anonymous_access has neither `id` nor `name` in its Terraform
+    # schema (one object per server); its external-name class (singleton,
+    # config/external_name.go) always normalizes to the constant "default"
+    # on the first Observe regardless of what is set here.
+    crossplane.io/external-name: default
 spec:
   managementPolicies: ["Observe"]
   providerConfigRef: { name: default, kind: ProviderConfig }
@@ -28,7 +32,9 @@ metadata:
   name: ssrf
   namespace: nexus
   annotations:
-    crossplane.io/external-name: SSRF_PROTECTION
+    # security_ssrf_protection is also a singleton (see AnonymousAccess
+    # above): the external name always normalizes to "default".
+    crossplane.io/external-name: default
 spec:
   managementPolicies: ["Observe"]
   providerConfigRef: { name: default, kind: ProviderConfig }
