@@ -13,7 +13,8 @@ via the fork
 required directly as `github.com/tinyorbitvn/terraform-provider-sonatyperepo`
 v1.19.0-xp.2 (fork branch `xp`; `xpprovider` branch = upstream PR material —
 it only adds a public `xpprovider` package re-exporting the provider
-constructor; a PR to upstream the shim is open).
+constructor; we are proposing the shim upstream; until it is merged **and**
+upstream adopts a dotted Go module path, the fork stays required).
 
 ## Install
 
@@ -59,13 +60,44 @@ API groups: `repository` (70 formats × hosted/proxy/group), `blobstore`,
 `privilege`, `cleanup`, `content`, `routing`, `task`. See `package/crds/` and
 `examples-generated/`.
 
-External names: repositories, blob stores, roles, privileges, routing rules,
-content selectors and cleanup policies are identified by their Nexus **name**
-(`crossplane.io/external-name: docker-hosted` adopts an existing one).
-Capabilities, tasks and certificates use the ID Nexus assigns; singletons
-(`Realms`, `AnonymousAccess`, `SsrfProtection`, …) use the fixed ID the
-Terraform provider returns (`SECURITY_REALMS`, `ANONYMOUS_ACCESS`,
-`SSRF_PROTECTION`, …); users use `<user_id>,<source>` (e.g. `admin,DEFAULT`).
+External names (see `config/external_name.go` for the full reasoning):
+
+- repositories, blob stores, privileges, routing rules, content selectors and
+  cleanup policies: identified by their Nexus **name**, read back from state
+  (`crossplane.io/external-name: <name>` adopts an existing one; defaults to
+  `metadata.name`, so names that are not valid Kubernetes object names —
+  upper case, `_`, … — need the annotation);
+- roles: identified by the role **`id`** (annotation; defaults to
+  `metadata.name`), `spec.forProvider.name` is the display name;
+- users: identified by **`user_id`** (annotation); `source` is read-only and
+  not part of the identity;
+- capabilities, `Realms`, SSL truststore, tasks and other kinds whose
+  Terraform schema has an `id`: ID assigned by Nexus, filled in after the
+  first reconcile;
+- the 9 one-per-server singletons (`AnonymousAccess`, `SsrfProtection`,
+  `Oauth2`, `Saml`, `UserTokens`, `ConfigHttp`, `ConfigMail`,
+  `ConfigProductLicense`, `IqConnection`): external name is always the
+  constant `default`.
+
+## Known limitations
+
+1. **Observe-only Docker repositories** — `DockerHosted`/`DockerProxy`/`DockerGroup`
+   with `managementPolicies: ["Observe"]` must populate the required blocks
+   (`storage`, `docker`, and `proxy`/`group` where applicable) in
+   `spec.forProvider`: the upstream Terraform models use non-pointer structs
+   and reject a null config ("Received null value…"). See the comments in
+   `examples/nexus/observe/repositories.yaml`. Create/Update are unaffected.
+2. **Deleting a singleton MR writes to Nexus** — the Terraform provider's
+   Delete for singletons is not a no-op: `AnonymousAccess` → sets
+   `enabled=false`; `ConfigHttp` → resets HTTP settings; `SsrfProtection` →
+   overwrites; `UserTokens` → disables; `ConfigMail` → deletes the mail
+   config (see the fork's `internal/provider/system/*_resource.go` /
+   `security/*_resource.go`). A GitOps prune therefore reconfigures the live
+   server — set `spec.deletionPolicy: Orphan` on singleton MRs unless that is
+   intended.
+3. **`secretRef.namespace`** is required by the CRD in both scopes; for the
+   namespaced `ProviderConfig` it must equal the ProviderConfig's own
+   namespace (the provider overrides it with the MR namespace).
 
 ## Develop
 

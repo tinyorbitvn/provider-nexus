@@ -2,6 +2,16 @@ apiVersion: meta.pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-nexus
+  annotations:
+    meta.crossplane.io/maintainer: tinyorbitvn
+    meta.crossplane.io/source: github.com/tinyorbitvn/provider-nexus
+    meta.crossplane.io/license: Apache-2.0
+    meta.crossplane.io/description: |
+      Crossplane provider for Sonatype Nexus Repository, generated with Upjet from
+      terraform-provider-sonatyperepo and running it in-process (no Terraform CLI).
+      Serves cluster-scoped (*.nexus.tinyorbit.vn) and namespaced (*.nexus.m.tinyorbit.vn) APIs.
 spec:
+  crossplane:
+    version: ">=v2.0.0-0"
   capabilities:
     - SafeStart

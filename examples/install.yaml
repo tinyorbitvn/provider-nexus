@@ -3,4 +3,4 @@ kind: Provider
 metadata:
   name: provider-nexus
 spec:
-  package: xpkg.crossplane.io/tinyorbitvn/provider-nexus:v0.1.0
+  package: ghcr.io/tinyorbitvn/provider-nexus:v0.1.0
