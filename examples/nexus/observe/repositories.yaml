@@ -8,7 +8,23 @@ metadata:
 spec:
   managementPolicies: ["Observe"]
   providerConfigRef: { name: default, kind: ProviderConfig }
-  forProvider: {}
+  # The vendored terraform-provider-sonatyperepo fork declares Storage/Docker as
+  # non-pointer Go structs (see internal/provider/model/repository_docker.go), so
+  # terraform-plugin-framework cannot read a null config into them: an empty
+  # forProvider (fine for every other Observe-only kind here) panics-then-errors
+  # with "Received null value ... Path: storage/docker" on Read (measured in kind
+  # 2026-09-13, Task 9 round 1). Values below mirror the real docker-hosted repo
+  # (curl .../v1/repositories/docker/hosted/docker-hosted) so Observe's atProvider
+  # matches reality; Observe never writes these back to Nexus.
+  forProvider:
+    storage:
+      blobStoreName: nexus-blobs
+      strictContentTypeValidation: true
+      writePolicy: ALLOW
+    docker:
+      forceBasicAuth: false
+      httpPort: 8082
+      v1Enabled: false
 ---
 apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
 kind: DockerProxy
@@ -20,7 +36,31 @@ metadata:
 spec:
   managementPolicies: ["Observe"]
   providerConfigRef: { name: default, kind: ProviderConfig }
-  forProvider: {}
+  # Same non-pointer-struct issue as DockerHosted, but RepositoryDockerProxyModel
+  # (embedding RepositoryProxyModel) has more non-pointer blocks: storage, docker,
+  # dockerProxy, proxy, negativeCache and httpClient all panic-then-error on a null
+  # config; routingRule/replication/repositoryFirewall are pointer/scalar fields
+  # and stay omitted safely. Values mirror the real docker-proxy repo.
+  forProvider:
+    storage:
+      blobStoreName: nexus-blobs
+      strictContentTypeValidation: true
+    docker:
+      forceBasicAuth: false
+      httpPort: 8084
+      v1Enabled: false
+    dockerProxy:
+      indexType: HUB
+    proxy:
+      remoteUrl: https://registry-1.docker.io
+      contentMaxAge: 1440
+      metadataMaxAge: 1440
+    negativeCache:
+      enabled: true
+      timeToLive: 1440
+    httpClient:
+      blocked: false
+      autoBlock: true
 ---
 apiVersion: repository.nexus.m.tinyorbit.vn/v1alpha1
 kind: DockerGroup
@@ -32,4 +72,17 @@ metadata:
 spec:
   managementPolicies: ["Observe"]
   providerConfigRef: { name: default, kind: ProviderConfig }
-  forProvider: {}
+  # Same non-pointer-struct issue as DockerHosted: RepositoryGroupDeployModel's
+  # storage and group blocks, plus RepositoryDockerGroupModel's docker block, are
+  # all non-pointer structs. writableMember is a nullable scalar and stays
+  # omitted. Values mirror the real docker-group repo.
+  forProvider:
+    storage:
+      blobStoreName: nexus-blobs
+      strictContentTypeValidation: true
+    group:
+      memberNames: ["docker-hosted", "docker-proxy"]
+    docker:
+      forceBasicAuth: false
+      httpPort: 8083
+      v1Enabled: false
