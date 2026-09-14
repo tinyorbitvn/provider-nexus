@@ -166,5 +166,5 @@ require (
 
 require (
 	github.com/google/go-cmp v0.7.0
-	github.com/tinyorbitvn/terraform-provider-sonatyperepo v1.19.0-xp.2
+	github.com/tinyorbitvn/terraform-provider-sonatyperepo v1.19.0-xp.3
 )
