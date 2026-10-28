@@ -1001,7 +1001,7 @@ resources:
             passphrase: (String, Sensitive) Passphrase to access the RSA signing key
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -1164,7 +1164,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             remote_url: (String) Location of the remote repository being proxied
@@ -1297,7 +1297,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             remote_url: (String) Location of the remote repository being proxied
@@ -1450,7 +1450,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -1530,7 +1530,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -1609,7 +1609,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -1757,7 +1757,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -1845,7 +1845,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -2058,7 +2058,7 @@ resources:
             password: (String, Sensitive) Password
             path_enabled: (Boolean) Allows to use repository name in Docker image paths (only supply for Sonatype Nexus Repository Manager >= 3.83.0)
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -2259,7 +2259,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -2400,7 +2400,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             remote_url: (String) Location of the remote repository being proxied
@@ -2484,7 +2484,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -2931,7 +2931,7 @@ resources:
             password: (String, Sensitive) Password
             pccs_enabled: (Boolean) Whether Policy-Compliant Component Selection is enabled. See documentatation for details.
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -3099,7 +3099,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -3327,7 +3327,7 @@ resources:
             password: (String, Sensitive) Password
             path_enabled: (Boolean) Allows to use repository name in OCI image paths
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -3414,7 +3414,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             remote_url: (String) Location of the remote repository being proxied
@@ -3580,7 +3580,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -3900,7 +3900,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -4064,7 +4064,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -4157,7 +4157,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -4316,7 +4316,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
@@ -4445,7 +4445,7 @@ resources:
             online: (Boolean) Whether this Repository is online and accepting incoming requests
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             remote_url: (String) Location of the remote repository being proxied
@@ -4794,7 +4794,7 @@ resources:
             passphrase: (String, Sensitive) Passphrase to access PGP signing key
             password: (String, Sensitive) Password
             policy_names: (Set of String) Set of Cleanup Policies that will apply to this Repository
-            preemptive: (Boolean) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
+            preemptive: (Boolean, Deprecated) Whether to use pre-emptive authentication. Use with caution. Defaults to false.
             preemptive_pull_enabled: (Boolean) Whether pre-emptive pull is enabled
             proxy: (Attributes) Proxy specific configuration for this Repository (see below for nested schema)
             quarantine: (Boolean) Whether Quarantine functionallity is enabled (if false - just run in Audit mode) - see documentation.
