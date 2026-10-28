@@ -522,6 +522,8 @@ type NpmProxyRepositoryFirewallInitParameters struct {
 
 	// Compliant Component Selection is enabled. See documentatation for details.
 	// Whether Policy-Compliant Component Selection is enabled. See [documentatation](https://help.sonatype.com/en/policy-compliant-component-selection.html) for details.
+	//
+	// On Sonatype Nexus Repository 3.94.0 and later, PCCS and `quarantine` are mutually exclusive Firewall modes, so `pccs_enabled` cannot be `true` while `quarantine` is also `true`.
 	PccsEnabled *bool `json:"pccsEnabled,omitempty" tf:"pccs_enabled,omitempty"`
 
 	// just run in Audit mode) - see documentation.
@@ -541,6 +543,8 @@ type NpmProxyRepositoryFirewallObservation struct {
 
 	// Compliant Component Selection is enabled. See documentatation for details.
 	// Whether Policy-Compliant Component Selection is enabled. See [documentatation](https://help.sonatype.com/en/policy-compliant-component-selection.html) for details.
+	//
+	// On Sonatype Nexus Repository 3.94.0 and later, PCCS and `quarantine` are mutually exclusive Firewall modes, so `pccs_enabled` cannot be `true` while `quarantine` is also `true`.
 	PccsEnabled *bool `json:"pccsEnabled,omitempty" tf:"pccs_enabled,omitempty"`
 
 	// just run in Audit mode) - see documentation.
@@ -557,6 +561,8 @@ type NpmProxyRepositoryFirewallParameters struct {
 
 	// Compliant Component Selection is enabled. See documentatation for details.
 	// Whether Policy-Compliant Component Selection is enabled. See [documentatation](https://help.sonatype.com/en/policy-compliant-component-selection.html) for details.
+	//
+	// On Sonatype Nexus Repository 3.94.0 and later, PCCS and `quarantine` are mutually exclusive Firewall modes, so `pccs_enabled` cannot be `true` while `quarantine` is also `true`.
 	// +kubebuilder:validation:Optional
 	PccsEnabled *bool `json:"pccsEnabled,omitempty" tf:"pccs_enabled,omitempty"`
 
