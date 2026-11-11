@@ -34,7 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: TerraformProxy is the Schema for the TerraformProxys API.
+        description: 'TerraformProxy is the Schema for the TerraformProxys API.  See
+          Issue #516 https://github.'
         properties:
           apiVersion:
             description: |-
@@ -284,8 +285,8 @@ spec:
                     properties:
                       requireAuthentication:
                         description: |-
-                          (Boolean) Indicates if this repository requires authentication overriding anonymous access.
-                          Indicates if this repository requires authentication overriding anonymous access.
+                          it accepts the value but always reports false, which causes Provider produced inconsistent result after apply. Leave this unset or set it to false.
+                          Indicates if this repository requires authentication overriding anonymous access. Leave this unset or set it to `false`.
                         type: boolean
                     type: object
                   url:
@@ -519,8 +520,8 @@ spec:
                     properties:
                       requireAuthentication:
                         description: |-
-                          (Boolean) Indicates if this repository requires authentication overriding anonymous access.
-                          Indicates if this repository requires authentication overriding anonymous access.
+                          it accepts the value but always reports false, which causes Provider produced inconsistent result after apply. Leave this unset or set it to false.
+                          Indicates if this repository requires authentication overriding anonymous access. Leave this unset or set it to `false`.
                         type: boolean
                     type: object
                   url:
@@ -826,8 +827,8 @@ spec:
                     properties:
                       requireAuthentication:
                         description: |-
-                          (Boolean) Indicates if this repository requires authentication overriding anonymous access.
-                          Indicates if this repository requires authentication overriding anonymous access.
+                          it accepts the value but always reports false, which causes Provider produced inconsistent result after apply. Leave this unset or set it to false.
+                          Indicates if this repository requires authentication overriding anonymous access. Leave this unset or set it to `false`.
                         type: boolean
                     type: object
                   url:

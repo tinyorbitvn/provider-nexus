@@ -52,8 +52,8 @@ func attrFlags(attrs map[string]any, name string) (found, required, optional, co
 // and every configured name must exist in the provider schema.
 func TestExternalNameConfigsCoverSchema(t *testing.T) {
 	schemas := loadResourceSchemas(t)
-	if len(schemas) != 119 {
-		t.Fatalf("expected 119 resources in schema.json, got %d", len(schemas))
+	if len(schemas) != 120 {
+		t.Fatalf("expected 120 resources in schema.json, got %d", len(schemas))
 	}
 	for name := range schemas {
 		if _, ok := ExternalNameConfigs[name]; !ok {
@@ -144,8 +144,8 @@ func TestExternalNameMatchesSchema(t *testing.T) {
 	}
 
 	all := len(nameFromStateResources) + len(providerIdentified) + len(singletonResources) + len(userResources) + len(roleResources)
-	if all != 119 {
-		t.Errorf("expected 119 total classified resources across all classes, got %d", all)
+	if all != 120 {
+		t.Errorf("expected 120 total classified resources across all classes, got %d", all)
 	}
 }
 
@@ -159,8 +159,8 @@ func TestNoDuplicateExternalNameEntries(t *testing.T) {
 			seen[n] = true
 		}
 	}
-	if len(seen) != 119 {
-		t.Errorf("expected 119 unique entries, got %d", len(seen))
+	if len(seen) != 120 {
+		t.Errorf("expected 120 unique entries, got %d", len(seen))
 	}
 }
 

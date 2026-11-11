@@ -106,7 +106,7 @@ require (
 	github.com/santhosh-tekuri/jsonschema/v6 v6.0.2 // indirect
 	github.com/sonatype-nexus-community/nexus-repo-api-client-go/v3 v3.93.2 // indirect
 	github.com/sonatype-nexus-community/nexus-repo-api-client-go/v395 v395.96.3 // indirect
-	github.com/sonatype-nexus-community/nexus-repo-api-client-go/v397 v397.97.1 // indirect
+	github.com/sonatype-nexus-community/nexus-repo-api-client-go/v397 v397.98.0 // indirect
 	github.com/sonatype-nexus-community/terraform-provider-shared v0.9.4 // indirect
 	github.com/spf13/afero v1.15.0 // indirect
 	github.com/spf13/cobra v1.10.2 // indirect
@@ -135,7 +135,7 @@ require (
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.5 // indirect
 	golang.org/x/mod v0.41.0 // indirect
-	golang.org/x/net v0.61.0 // indirect
+	golang.org/x/net v0.62.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
 	golang.org/x/sys v0.49.0 // indirect
@@ -167,5 +167,5 @@ require (
 
 require (
 	github.com/google/go-cmp v0.7.0
-	github.com/tinyorbitvn/terraform-provider-sonatyperepo v1.20.0-xp.1
+	github.com/tinyorbitvn/terraform-provider-sonatyperepo v1.22.0-xp.1
 )

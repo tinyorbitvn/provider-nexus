@@ -54,7 +54,7 @@ cluster status on start) plus the privileges of whatever you manage.
 
 ## Resources
 
-All 119 resources of terraform-provider-sonatyperepo 1.19.0 are generated.
+All 120 resources of terraform-provider-sonatyperepo 1.22.0 are generated.
 API groups: `repository` (70 formats × hosted/proxy/group), `blobstore`,
 `security` (realms, ssrfprotection, users, roles, …), `system`, `capability`,
 `privilege`, `cleanup`, `content`, `routing`, `task`. See `package/crds/` and

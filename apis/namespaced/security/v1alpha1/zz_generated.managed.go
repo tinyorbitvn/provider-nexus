@@ -208,6 +208,46 @@ func (mg *SSLTruststore) SetWriteConnectionSecretToReference(r *xpv2.LocalSecret
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this ServiceAccountToken.
+func (mg *ServiceAccountToken) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this ServiceAccountToken.
+func (mg *ServiceAccountToken) GetManagementPolicies() xpv2.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ServiceAccountToken.
+func (mg *ServiceAccountToken) GetProviderConfigReference() *xpv2.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ServiceAccountToken.
+func (mg *ServiceAccountToken) GetWriteConnectionSecretToReference() *xpv2.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ServiceAccountToken.
+func (mg *ServiceAccountToken) SetConditions(c ...xpv2.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this ServiceAccountToken.
+func (mg *ServiceAccountToken) SetManagementPolicies(r xpv2.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ServiceAccountToken.
+func (mg *ServiceAccountToken) SetProviderConfigReference(r *xpv2.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ServiceAccountToken.
+func (mg *ServiceAccountToken) SetWriteConnectionSecretToReference(r *xpv2.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SsrfProtection.
 func (mg *SsrfProtection) GetCondition(ct xpv2.ConditionType) xpv2.Condition {
 	return mg.Status.GetCondition(ct)

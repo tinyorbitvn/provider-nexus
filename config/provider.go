@@ -27,7 +27,7 @@ func GetProvider() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithRootGroup("nexus.tinyorbit.vn"),
 		// IncludeList (the Terraform-CLI list) stays nil: no resource is
-		// reconciled via the Terraform CLI here. Passing the same 119 names
+		// reconciled via the Terraform CLI here. Passing the same 120 names
 		// to both IncludeList and TerraformPluginFrameworkIncludeList makes
 		// upjet panic with "specified in more than one include list" for
 		// every resource (hit during `make generate` 2026-09-13) — a

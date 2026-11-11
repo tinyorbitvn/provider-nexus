@@ -551,22 +551,22 @@ type TerraformProxyStorageParameters struct {
 
 type TerraformProxyTerraformInitParameters struct {
 
-	// (Boolean) Indicates if this repository requires authentication overriding anonymous access.
-	// Indicates if this repository requires authentication overriding anonymous access.
+	// it accepts the value but always reports false, which causes Provider produced inconsistent result after apply. Leave this unset or set it to false.
+	// Indicates if this repository requires authentication overriding anonymous access. Leave this unset or set it to `false`.
 	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
 }
 
 type TerraformProxyTerraformObservation struct {
 
-	// (Boolean) Indicates if this repository requires authentication overriding anonymous access.
-	// Indicates if this repository requires authentication overriding anonymous access.
+	// it accepts the value but always reports false, which causes Provider produced inconsistent result after apply. Leave this unset or set it to false.
+	// Indicates if this repository requires authentication overriding anonymous access. Leave this unset or set it to `false`.
 	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
 }
 
 type TerraformProxyTerraformParameters struct {
 
-	// (Boolean) Indicates if this repository requires authentication overriding anonymous access.
-	// Indicates if this repository requires authentication overriding anonymous access.
+	// it accepts the value but always reports false, which causes Provider produced inconsistent result after apply. Leave this unset or set it to false.
+	// Indicates if this repository requires authentication overriding anonymous access. Leave this unset or set it to `false`.
 	// +kubebuilder:validation:Optional
 	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
 }
@@ -598,7 +598,7 @@ type TerraformProxyStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// TerraformProxy is the Schema for the TerraformProxys API.
+// TerraformProxy is the Schema for the TerraformProxys API.  See Issue #516 https://github.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

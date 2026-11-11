@@ -111,6 +111,7 @@ import (
 	realms "github.com/tinyorbitvn/provider-nexus/internal/controller/cluster/security/realms"
 	role "github.com/tinyorbitvn/provider-nexus/internal/controller/cluster/security/role"
 	saml "github.com/tinyorbitvn/provider-nexus/internal/controller/cluster/security/saml"
+	serviceaccounttoken "github.com/tinyorbitvn/provider-nexus/internal/controller/cluster/security/serviceaccounttoken"
 	ssltruststore "github.com/tinyorbitvn/provider-nexus/internal/controller/cluster/security/ssltruststore"
 	ssrfprotection "github.com/tinyorbitvn/provider-nexus/internal/controller/cluster/security/ssrfprotection"
 	user "github.com/tinyorbitvn/provider-nexus/internal/controller/cluster/security/user"
@@ -237,6 +238,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		realms.Setup,
 		role.Setup,
 		saml.Setup,
+		serviceaccounttoken.Setup,
 		ssltruststore.Setup,
 		ssrfprotection.Setup,
 		user.Setup,
@@ -369,6 +371,7 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		realms.SetupGated,
 		role.SetupGated,
 		saml.SetupGated,
+		serviceaccounttoken.SetupGated,
 		ssltruststore.SetupGated,
 		ssrfprotection.SetupGated,
 		user.SetupGated,
@@ -500,6 +503,7 @@ func SetupWebhookWithManager(mgr ctrl.Manager) error {
 		realms.SetupWebhookWithManager,
 		role.SetupWebhookWithManager,
 		saml.SetupWebhookWithManager,
+		serviceaccounttoken.SetupWebhookWithManager,
 		ssltruststore.SetupWebhookWithManager,
 		ssrfprotection.SetupWebhookWithManager,
 		user.SetupWebhookWithManager,

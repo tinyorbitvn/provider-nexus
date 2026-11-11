@@ -8,7 +8,7 @@ import (
 )
 
 // Facts (config/schema.json, resource_schemas, verified 2026-09-13): of the
-// 119 sonatyperepo_* resources, 25 have a top-level `id` attribute and 94 do
+// 120 sonatyperepo_* resources, 26 have a top-level `id` attribute and 94 do
 // not. Upjet's plugin-framework controller
 // (external_tfpluginfw.go:setExternalName, ~line 962) always calls
 // cfg.ExternalName.GetExternalNameFn(stateValueMap) on every
@@ -122,7 +122,7 @@ var nameFromStateResources = []string{
 	"sonatyperepo_routing_rule",
 }
 
-// providerIdentified lists the 24 resources whose Terraform schema HAS an
+// providerIdentified lists the 25 resources whose Terraform schema HAS an
 // `id` attribute assigned by Nexus itself (capability and task IDs,
 // certificate IDs, the fixed SECURITY_REALMS/LDAP tokens): unchanged from
 // before this fix, since these already work against the real Nexus
@@ -144,6 +144,7 @@ var providerIdentified = []string{
 	"sonatyperepo_capability_webhook_global",
 	"sonatyperepo_capability_webhook_repository",
 	"sonatyperepo_security_realms",
+	"sonatyperepo_security_service_account_token",
 	"sonatyperepo_security_ssl_truststore",
 	"sonatyperepo_system_config_ldap_connection",
 	"sonatyperepo_task_blobstore_compact",
